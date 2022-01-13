@@ -1,0 +1,19 @@
+{
+    "name": "Daniell-Dialogues.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d1c4eec224ee7b24e82c3e2368f75fde",
+        "GUID:0b492bc3dd91d944fa251853ab454d34"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

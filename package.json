@@ -1,0 +1,15 @@
+{
+  "name": "com.test.daniell",
+  "version": "1.0.0",
+  "displayName": "Daniell Dialogues",
+  "description": "Branching dialog system and node editor",
+  "unity": "2020.3",
+  "unityRelease": "0b5",
+  "dependencies": {
+ },
+  "author": {
+    "name": "Robert Edilber",
+    "email": "robert.edilber@pm.me",
+    "url": "https://github.com/robertedilber"
+  }
+}
