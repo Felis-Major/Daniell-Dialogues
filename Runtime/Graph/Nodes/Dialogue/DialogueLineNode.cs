@@ -1,11 +1,12 @@
-﻿using Daniell.Runtime.Systems.SimpleSave;
+﻿using Daniell.Runtime.Systems.Events;
+using Daniell.Runtime.Systems.SimpleSave;
 
 namespace Daniell.Runtime.Systems.DialogueNodes
 {
     /// <summary>
     /// Node used to trigger a new dialogue line
     /// </summary>
-    [NodeName("Line")]
+    [NodeName("Dialogue Line")]
     [NodeColor(150, 70, 80)]
     public class DialogueLineNode : BaseNode
     {

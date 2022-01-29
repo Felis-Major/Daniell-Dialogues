@@ -4,7 +4,7 @@
     /// Node used as a starting point of every dialogue graph
     /// </summary>
     [NodeName("Start")]
-    [NodeColor(38, 109, 30)]
+    [NodeColor(60, 130, 60)]
     [NodeWidth(3)]
     [SingleInstanceNode]
     public class StartNode : BaseNode

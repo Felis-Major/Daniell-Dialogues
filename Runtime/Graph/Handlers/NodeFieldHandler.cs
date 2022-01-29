@@ -9,6 +9,16 @@ namespace Daniell.Runtime.Systems.DialogueNodes
     public class NodeFieldHandler : NodeElementHandler
     {
         /* ==========================
+         * > Properties
+         * -------------------------- */
+
+        /// <summary>
+        /// List of all node fields
+        /// </summary>
+        public Dictionary<string, NodeField>.ValueCollection NodeFields => _fields.Values;
+
+
+        /* ==========================
          * > Private Fields
          * -------------------------- */
 

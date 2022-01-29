@@ -185,6 +185,12 @@ namespace Daniell.Runtime.Systems.DialogueNodes
             nodeSaveData.Set("GUID", GUID);
             nodeSaveData.Set("Position", Position);
             nodeSaveData.Set("Type", GetType().AssemblyQualifiedName);
+
+            // Save all node fields
+            foreach (var nodeField in _nodeFieldHandler.NodeFields)
+            {
+                nodeField.Save();
+            }
         }
 
         /// <summary>

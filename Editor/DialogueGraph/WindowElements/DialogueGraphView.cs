@@ -35,7 +35,7 @@ namespace Daniell.Editor.DialogueNodes
 
             // Style the graph
             AddManipulators();
-            SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
+            SetupZoom(0.25f, 1.25f);
             ApplyGridBackground();
             SetupSearchWindow();
 

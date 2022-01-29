@@ -34,6 +34,7 @@ namespace Daniell.Runtime.Systems.DialogueNodes
         {
             base.SetValue(value);
             _field.value = value;
+            _field.MarkDirtyRepaint();
         }
 
         /// <summary>
@@ -49,7 +50,8 @@ namespace Daniell.Runtime.Systems.DialogueNodes
         /// </summary>
         protected override VisualElement CreateNodeField()
         {
-            return new TField();
+            _field = new TField();
+            return _field;
         }
     }
 }

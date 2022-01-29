@@ -41,7 +41,6 @@ namespace Daniell.Editor.DialogueNodes
 
             // Create save button
             Button saveButton = new Button(() => OnSaveButtonPressed?.Invoke());
-
             saveButton.contentContainer.Add(new Image() { image = EditorGUIUtility.IconContent("d_SaveAs").image });
             saveButton.style.width = 30;
 

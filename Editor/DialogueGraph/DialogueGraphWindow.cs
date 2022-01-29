@@ -168,6 +168,11 @@ namespace Daniell.Editor.DialogueNodes
         /// </summary>
         public void Save()
         {
+            if(_dialogueFile == null)
+            {
+                return;
+            }
+
             // List all the nodes in the graphview
             _dialogueFile.ClearData();
 
@@ -183,6 +188,12 @@ namespace Daniell.Editor.DialogueNodes
                 // Save the data bundle as json in the dialogue file
                 string bundleAsJson = JsonUtility.ToJson(nodeData, true);
                 _dialogueFile.AddData(bundleAsJson);
+            }
+
+            if (_dialogueFile != null)
+            {
+                EditorUtility.SetDirty(_dialogueFile);
+                AssetDatabase.SaveAssets();
             }
         }
 

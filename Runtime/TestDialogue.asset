@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d37bef83845b764c9fcbbc0c0e9a520, type: 3}
+  m_Name: TestDialogue
+  m_EditorClassIdentifier: 
+  _data:
+  - "{\n    \"_guid\": \"8b610f27-3bee-4604-95cc-c28494ae3cd3\",\n    \"_saveDataBundle\":
+    [\n        {\n            \"_key\": \"GUID\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"8b610f27-3bee-4604-95cc-c28494ae3cd3\\\"}\"\n       
+    },\n        {\n            \"_key\": \"Position\",\n            \"_jsonData\":
+    \"{\\\"value\\\":{\\\"x\\\":50.0,\\\"y\\\":50.0}}\"\n        },\n        {\n           
+    \"_key\": \"Type\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"Daniell.Runtime.Systems.DialogueNodes.StartNode,
+    Daniell-Dialogues.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null\\\"}\"\n       
+    },\n        {\n            \"_key\": \"Connections\",\n            \"_jsonData\":
+    \"{\\\"value\\\":[{\\\"_connectionOrigin\\\":{\\\"_nodeGUID\\\":\\\"8b610f27-3bee-4604-95cc-c28494ae3cd3\\\",\\\"_portID\\\":\\\"Output>Next\\\"},\\\"_connectionTarget\\\":{\\\"_nodeGUID\\\":\\\"a51283c5-3e98-4da4-9f20-08e86f65ef8d\\\",\\\"_portID\\\":\\\"Input>Input\\\"}}]}\"\n       
+    }\n    ]\n}"
+  - "{\n    \"_guid\": \"a51283c5-3e98-4da4-9f20-08e86f65ef8d\",\n    \"_saveDataBundle\":
+    [\n        {\n            \"_key\": \"GUID\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"a51283c5-3e98-4da4-9f20-08e86f65ef8d\\\"}\"\n       
+    },\n        {\n            \"_key\": \"Position\",\n            \"_jsonData\":
+    \"{\\\"value\\\":{\\\"x\\\":150.0,\\\"y\\\":-25.0}}\"\n        },\n        {\n           
+    \"_key\": \"Type\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"Daniell.Runtime.Systems.DialogueNodes.DialogueLineNode,
+    Daniell-Dialogues.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null\\\"}\"\n       
+    },\n        {\n            \"_key\": \"Speaker\",\n            \"_jsonData\":
+    \"{\\\"value\\\":{\\\"instanceID\\\":16644}}\"\n        },\n        {\n           
+    \"_key\": \"Line\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"www\\\"}\"\n       
+    },\n        {\n            \"_key\": \"Connections\",\n            \"_jsonData\":
+    \"{\\\"value\\\":[{\\\"_connectionOrigin\\\":{\\\"_nodeGUID\\\":\\\"a51283c5-3e98-4da4-9f20-08e86f65ef8d\\\",\\\"_portID\\\":\\\"Input>Input\\\"},\\\"_connectionTarget\\\":{\\\"_nodeGUID\\\":\\\"8b610f27-3bee-4604-95cc-c28494ae3cd3\\\",\\\"_portID\\\":\\\"Output>Next\\\"}},{\\\"_connectionOrigin\\\":{\\\"_nodeGUID\\\":\\\"a51283c5-3e98-4da4-9f20-08e86f65ef8d\\\",\\\"_portID\\\":\\\"Output>Next\\\"},\\\"_connectionTarget\\\":{\\\"_nodeGUID\\\":\\\"d03865fb-0dc3-405b-bd46-2f62a1a22c6a\\\",\\\"_portID\\\":\\\"Input>Input\\\"}}]}\"\n       
+    }\n    ]\n}"
+  - "{\n    \"_guid\": \"bb3ccd67-5a7b-4628-9c8d-0a4ef5cc5dcc\",\n    \"_saveDataBundle\":
+    [\n        {\n            \"_key\": \"GUID\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"bb3ccd67-5a7b-4628-9c8d-0a4ef5cc5dcc\\\"}\"\n       
+    },\n        {\n            \"_key\": \"Position\",\n            \"_jsonData\":
+    \"{\\\"value\\\":{\\\"x\\\":150.0,\\\"y\\\":150.0}}\"\n        },\n        {\n           
+    \"_key\": \"Type\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"Daniell.Runtime.Systems.DialogueNodes.DialogueLineNode,
+    Daniell-Dialogues.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null\\\"}\"\n       
+    },\n        {\n            \"_key\": \"Speaker\",\n            \"_jsonData\":
+    \"{\\\"value\\\":{\\\"instanceID\\\":16644}}\"\n        },\n        {\n           
+    \"_key\": \"Line\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"aaaaa\\\"}\"\n       
+    },\n        {\n            \"_key\": \"Connections\",\n            \"_jsonData\":
+    \"{\\\"value\\\":[{\\\"_connectionOrigin\\\":{\\\"_nodeGUID\\\":\\\"bb3ccd67-5a7b-4628-9c8d-0a4ef5cc5dcc\\\",\\\"_portID\\\":\\\"Output>Next\\\"},\\\"_connectionTarget\\\":{\\\"_nodeGUID\\\":\\\"d03865fb-0dc3-405b-bd46-2f62a1a22c6a\\\",\\\"_portID\\\":\\\"Input>Input\\\"}}]}\"\n       
+    }\n    ]\n}"
+  - "{\n    \"_guid\": \"6f4669d9-bc49-41e6-ba11-d219da289e15\",\n    \"_saveDataBundle\":
+    [\n        {\n            \"_key\": \"GUID\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"6f4669d9-bc49-41e6-ba11-d219da289e15\\\"}\"\n       
+    },\n        {\n            \"_key\": \"Position\",\n            \"_jsonData\":
+    \"{\\\"value\\\":{\\\"x\\\":150.0,\\\"y\\\":325.0}}\"\n        },\n        {\n           
+    \"_key\": \"Type\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"Daniell.Runtime.Systems.DialogueNodes.DialogueLineNode,
+    Daniell-Dialogues.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null\\\"}\"\n       
+    },\n        {\n            \"_key\": \"Speaker\",\n            \"_jsonData\":
+    \"{\\\"value\\\":{\\\"instanceID\\\":16642}}\"\n        },\n        {\n           
+    \"_key\": \"Line\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"dxx\\\"}\"\n       
+    },\n        {\n            \"_key\": \"Connections\",\n            \"_jsonData\":
+    \"{\\\"value\\\":[{\\\"_connectionOrigin\\\":{\\\"_nodeGUID\\\":\\\"6f4669d9-bc49-41e6-ba11-d219da289e15\\\",\\\"_portID\\\":\\\"Output>Next\\\"},\\\"_connectionTarget\\\":{\\\"_nodeGUID\\\":\\\"d03865fb-0dc3-405b-bd46-2f62a1a22c6a\\\",\\\"_portID\\\":\\\"Input>Input\\\"}}]}\"\n       
+    }\n    ]\n}"
+  - "{\n    \"_guid\": \"d03865fb-0dc3-405b-bd46-2f62a1a22c6a\",\n    \"_saveDataBundle\":
+    [\n        {\n            \"_key\": \"GUID\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"d03865fb-0dc3-405b-bd46-2f62a1a22c6a\\\"}\"\n       
+    },\n        {\n            \"_key\": \"Position\",\n            \"_jsonData\":
+    \"{\\\"value\\\":{\\\"x\\\":500.0,\\\"y\\\":-25.0}}\"\n        },\n        {\n           
+    \"_key\": \"Type\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"Daniell.Runtime.Systems.DialogueNodes.DialogueLineNode,
+    Daniell-Dialogues.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null\\\"}\"\n       
+    },\n        {\n            \"_key\": \"Speaker\",\n            \"_jsonData\":
+    \"{\\\"value\\\":{\\\"instanceID\\\":16642}}\"\n        },\n        {\n           
+    \"_key\": \"Line\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"c\\\"}\"\n       
+    },\n        {\n            \"_key\": \"Connections\",\n            \"_jsonData\":
+    \"{\\\"value\\\":[{\\\"_connectionOrigin\\\":{\\\"_nodeGUID\\\":\\\"d03865fb-0dc3-405b-bd46-2f62a1a22c6a\\\",\\\"_portID\\\":\\\"Input>Input\\\"},\\\"_connectionTarget\\\":{\\\"_nodeGUID\\\":\\\"6f4669d9-bc49-41e6-ba11-d219da289e15\\\",\\\"_portID\\\":\\\"Output>Next\\\"}},{\\\"_connectionOrigin\\\":{\\\"_nodeGUID\\\":\\\"d03865fb-0dc3-405b-bd46-2f62a1a22c6a\\\",\\\"_portID\\\":\\\"Input>Input\\\"},\\\"_connectionTarget\\\":{\\\"_nodeGUID\\\":\\\"bb3ccd67-5a7b-4628-9c8d-0a4ef5cc5dcc\\\",\\\"_portID\\\":\\\"Output>Next\\\"}},{\\\"_connectionOrigin\\\":{\\\"_nodeGUID\\\":\\\"d03865fb-0dc3-405b-bd46-2f62a1a22c6a\\\",\\\"_portID\\\":\\\"Input>Input\\\"},\\\"_connectionTarget\\\":{\\\"_nodeGUID\\\":\\\"a51283c5-3e98-4da4-9f20-08e86f65ef8d\\\",\\\"_portID\\\":\\\"Output>Next\\\"}}]}\"\n       
+    }\n    ]\n}"

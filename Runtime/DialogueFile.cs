@@ -1,7 +1,5 @@
-﻿using Daniell.Runtime.Helpers.DataStructures;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 namespace Daniell.Runtime.Systems.DialogueNodes
@@ -33,7 +31,7 @@ namespace Daniell.Runtime.Systems.DialogueNodes
         public virtual Dictionary<Type, string> GetValidNodeTypes()
         {
             return new Dictionary<Type, string> {
-                { typeof(DialogueLineNode), "Dialogue" }
+                { typeof(DialogueLineNode), "Dialogue Line" }
             };
         }
     }

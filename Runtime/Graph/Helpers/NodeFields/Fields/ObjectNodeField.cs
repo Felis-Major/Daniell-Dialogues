@@ -1,4 +1,5 @@
-﻿using UnityEditor.UIElements;
+﻿using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
 namespace Daniell.Runtime.Systems.DialogueNodes
@@ -52,6 +53,18 @@ namespace Daniell.Runtime.Systems.DialogueNodes
             _objectField = new ObjectField();
             _objectField.objectType = typeof(T);
             return _objectField;
+        }
+
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        public override void Save()
+        {
+            if (_objectField != null && _objectField.value != null)
+            {
+                EditorUtility.SetDirty(_objectField.value);
+                AssetDatabase.SaveAssets();
+            }
         }
     }
 }

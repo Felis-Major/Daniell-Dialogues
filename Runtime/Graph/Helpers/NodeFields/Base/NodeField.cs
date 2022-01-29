@@ -1,4 +1,5 @@
-﻿using UnityEngine.UIElements;
+﻿using UnityEditor;
+using UnityEngine.UIElements;
 
 namespace Daniell.Runtime.Systems.DialogueNodes
 {
@@ -25,9 +26,12 @@ namespace Daniell.Runtime.Systems.DialogueNodes
             _nodeFieldLabel = new NodeFieldLabel(labelText);
             _nodeFieldBox = new NodeFieldBox();
 
-            // Add fields to the root
+            // Add fields to the box
             _nodeFieldBox.Add(_nodeFieldLabel);
             _nodeFieldBox.Add(CreateNodeField());
+
+            // Add the box to the root
+            Add(_nodeFieldBox);
         }
 
 
@@ -40,5 +44,14 @@ namespace Daniell.Runtime.Systems.DialogueNodes
         /// </summary>
         /// <returns>Created visual element</returns>
         protected abstract VisualElement CreateNodeField();
+
+
+        /// <summary>
+        /// Save this object field
+        /// </summary>
+        public virtual void Save()
+        {
+            // Save field
+        }
     }
 }
