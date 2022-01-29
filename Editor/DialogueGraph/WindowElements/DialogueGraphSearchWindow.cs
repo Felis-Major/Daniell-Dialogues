@@ -10,11 +10,23 @@ using UnityEngine.UIElements;
 
 namespace Daniell.Editor.DialogueNodes
 {
+    /// <summary>
+    /// Handles searching and creating nodes
+    /// </summary>
     public class DialogueGraphSearchWindow : ScriptableObject, ISearchWindowProvider
     {
+        /* ==========================
+         * > Private Fields
+         * -------------------------- */
+
         private EditorWindow _editorWindow;
         private DialogueGraphView _graphView;
         private Dictionary<Type, string> _validNodeTypes;
+
+
+        /* ==========================
+         * > Methods
+         * -------------------------- */
 
         public void Initialize(EditorWindow editorWindow, DialogueGraphView dialogueGraphView, Dictionary<Type, string> validNodeTypes)
         {

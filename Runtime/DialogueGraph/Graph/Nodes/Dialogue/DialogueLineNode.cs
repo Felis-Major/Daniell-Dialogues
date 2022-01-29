@@ -10,21 +10,6 @@ namespace Daniell.Runtime.Systems.DialogueNodes
     public class DialogueLineNode : BaseNode
     {
         /* ==========================
-         * > Constants
-         * -------------------------- */
-
-        /// <summary>
-        /// Name of the speaker field
-        /// </summary>
-        private const string SPEAKER_FIELD_NAME = "Speaker";
-
-        /// <summary>
-        /// Name of the line field
-        /// </summary>
-        private const string LINE_FIELD_NAME = "Line";
-
-
-        /* ==========================
          * > Constructors
          * -------------------------- */
 
@@ -35,8 +20,8 @@ namespace Daniell.Runtime.Systems.DialogueNodes
             _nodePortHandler.AddOutputPort("Next");
 
             // Add parameter fields and link to variables
-            _nodeFieldHandler.AddField(new ObjectNodeField<Character>("Speaker"), SPEAKER_FIELD_NAME);
-            _nodeFieldHandler.AddField(new StringNodeField("Line", true), LINE_FIELD_NAME);
+            _nodeFieldHandler.AddField(new ObjectNodeField<Character>("Speaker"), "Speaker Field");
+            _nodeFieldHandler.AddField(new StringNodeField("Line"), "Line Field");
         }
 
 
@@ -53,10 +38,10 @@ namespace Daniell.Runtime.Systems.DialogueNodes
         {
             base.SaveNodeData(nodeSaveData);
 
-            var speaker = _nodeFieldHandler.GetFieldValue<Character>(SPEAKER_FIELD_NAME);
+            var speaker = _nodeFieldHandler.GetFieldValue<Character>("Speaker Field");
             nodeSaveData.Set("Speaker", speaker);
 
-            var line = _nodeFieldHandler.GetFieldValue<string>(LINE_FIELD_NAME);
+            var line = _nodeFieldHandler.GetFieldValue<string>("Line Field");
             nodeSaveData.Set("Line", line);
         }
 
@@ -68,10 +53,10 @@ namespace Daniell.Runtime.Systems.DialogueNodes
             base.LoadNodeData(nodeSaveData);
 
             var speaker = nodeSaveData.Get<Character>("Speaker");
-            _nodeFieldHandler.SetFieldValue(SPEAKER_FIELD_NAME, speaker);
+            _nodeFieldHandler.SetFieldValue("Speaker Field", speaker);
 
             var line = nodeSaveData.Get<string>("Line");
-            _nodeFieldHandler.SetFieldValue(LINE_FIELD_NAME, line);
+            _nodeFieldHandler.SetFieldValue("Line Field", line);
         }
 
         #endregion

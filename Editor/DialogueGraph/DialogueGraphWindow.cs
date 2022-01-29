@@ -163,6 +163,9 @@ namespace Daniell.Editor.DialogueNodes
 
         #region Save & Load
 
+        /// <summary>
+        /// Save all the node and their data
+        /// </summary>
         public void Save()
         {
             // List all the nodes in the graphview
@@ -183,8 +186,17 @@ namespace Daniell.Editor.DialogueNodes
             }
         }
 
+        /// <summary>
+        /// Load graph content from the dialogue file
+        /// </summary>
         public void Load()
         {
+            // Do not continue if there is no dialogue file
+            if(_dialogueFile == null)
+            {
+                return;
+            }
+
             List<NodeConnection> nodeConnections = new List<NodeConnection>();
 
             // Create nodes and load connections
@@ -216,6 +228,10 @@ namespace Daniell.Editor.DialogueNodes
 
         #region Helpers
 
+        /// <summary>
+        /// Connect two ports together
+        /// </summary>
+        /// <param name="nodeConnection">Node connection infos</param>
         private void ConnectNodes(NodeConnection nodeConnection)
         {
             GetNodeAndPortFromIdentifier(nodeConnection.ConnectionOrigin, out BaseNode _, out Port originPort);
@@ -242,6 +258,12 @@ namespace Daniell.Editor.DialogueNodes
             _graphView.Add(edge);
         }
 
+        /// <summary>
+        /// Are both ports connected to each other?
+        /// </summary>
+        /// <param name="origin">Origin port</param>
+        /// <param name="target">Target port</param>
+        /// <returns>True if ports are connected</returns>
         private bool ArePortsConnected(Port origin, Port target)
         {
             if (!origin.connected || !target.connected)
@@ -260,12 +282,23 @@ namespace Daniell.Editor.DialogueNodes
             return false;
         }
 
-        private void GetNodeAndPortFromIdentifier(NodePortIdentifier nodePortIdentifier, out BaseNode node, out Port port)
+        /// <summary>
+        /// Outputs a node and a port from an identifier
+        /// </summary>
+        /// <param name="nodePortID">Node Port infos</param>
+        /// <param name="node">Node with matching GUID</param>
+        /// <param name="port">Port with matching ID</param>
+        private void GetNodeAndPortFromIdentifier(NodePortIdentifier nodePortID, out BaseNode node, out Port port)
         {
-            node = FindNodeByGUID(nodePortIdentifier.NodeGUID);
-            port = node.GetPortByID(nodePortIdentifier.PortID);
+            node = FindNodeByGUID(nodePortID.NodeGUID);
+            port = node.GetPortByID(nodePortID.PortID);
         }
 
+        /// <summary>
+        /// Find a node by its GUID
+        /// </summary>
+        /// <param name="guid">GUID to look for</param>
+        /// <returns>Node with matching GUID</returns>
         public BaseNode FindNodeByGUID(string guid)
         {
             foreach (BaseNode node in Nodes)

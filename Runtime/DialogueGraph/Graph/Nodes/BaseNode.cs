@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Daniell.Runtime.Systems.DialogueNodes
 {
@@ -74,15 +75,15 @@ namespace Daniell.Runtime.Systems.DialogueNodes
 
         public BaseNode()
         {
+            // Assign new GUID
+            GUID = Guid.NewGuid().ToString();
+
             SetDefaultNodeStyleAndPosition();
             SetNodeAttributes();
 
             // Create handlers
             _nodePortHandler = new NodePortHandler(this);
             _nodeFieldHandler = new NodeFieldHandler(this);
-
-            // Assign new GUID
-            GUID = Guid.NewGuid().ToString();
         }
 
 
@@ -126,7 +127,7 @@ namespace Daniell.Runtime.Systems.DialogueNodes
             // Set node name
             title = NodeName;
 
-            // Get Name attribute
+            // Get Width attribute
             var widthAttribute = ReflectionHelpers.GetAttributeForType<NodeWidthAttribute>(GetType());
             style.width = widthAttribute.Width * NODE_SNAP_SIZE;
         }

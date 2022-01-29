@@ -1,8 +1,4 @@
-﻿using System;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine;
-
-namespace Daniell.Runtime.Systems.DialogueNodes
+﻿namespace Daniell.Runtime.Systems.DialogueNodes
 {
     /// <summary>
     /// Node used as a starting point of every dialogue graph
@@ -10,6 +6,7 @@ namespace Daniell.Runtime.Systems.DialogueNodes
     [NodeName("Start")]
     [NodeColor(38, 109, 30)]
     [NodeWidth(3)]
+    [SingleInstanceNode]
     public class StartNode : BaseNode
     {
         /* ==========================
