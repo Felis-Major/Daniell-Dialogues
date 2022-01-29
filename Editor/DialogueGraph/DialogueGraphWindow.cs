@@ -1,24 +1,41 @@
 ﻿using Daniell.Runtime.Systems.DialogueNodes;
+using Daniell.Runtime.Systems.SimpleSave;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Daniell.Editor.DialogueNodes
 {
+    /// <summary>
+    /// Editor window used to edit dialogue files
+    /// </summary>
     public class DialogueGraphWindow : EditorWindow
     {
-        // Properties
-        private List<DialogueBranchNode> DialogueNodes => _graphView?.nodes.ToList().Cast<DialogueBranchNode>().ToList();
+        /* ==========================
+         * > Private Fields
+         * -------------------------- */
 
-        // Private fields
+        /// <summary>
+        /// List of all the nodes currently in the graph
+        /// </summary>
+        public IEnumerable<BaseNode> Nodes => _graphView.nodes.ToList().Cast<BaseNode>();
+
+
+        /* ==========================
+         * > Private Fields
+         * -------------------------- */
+
         private DialogueGraphView _graphView;
-        private Toolbar _toolbar;
+        private DialogueGraphToolbar _toolbar;
         private DialogueFile _dialogueFile;
+
+
+        /* ==========================
+         * > Methods
+         * -------------------------- */
 
         [MenuItem("Daniell/Dialogue Graph")]
         public static void Open()
@@ -27,7 +44,7 @@ namespace Daniell.Editor.DialogueNodes
             window.titleContent = new GUIContent("Dialogue Graph");
         }
 
-        #region Init / Deinit
+        #region Enable / Disable
 
         private void OnEnable()
         {
@@ -55,26 +72,11 @@ namespace Daniell.Editor.DialogueNodes
         {
             if (_toolbar == null)
             {
-                _toolbar = new Toolbar();
+                _toolbar = new DialogueGraphToolbar();
+                _toolbar.OnDialogueFileLoaded += OnDialogueFileValueChanged;
+                _toolbar.OnSaveButtonPressed += Save;
 
-                // Save button
-                CreateToolbarButton("Save", () => Save());
-
-                // Dialogue File loading field
-                ObjectField scriptableDialogFile = new ObjectField();
-                scriptableDialogFile.objectType = typeof(DialogueFile);
-                scriptableDialogFile.RegisterValueChangedCallback(x => OnDialogueFileValueChanged((DialogueFile)x.newValue));
-                _toolbar.Add(scriptableDialogFile);
-
-                // Add the toolbar to the window
                 rootVisualElement.Add(_toolbar);
-            }
-
-            void CreateToolbarButton(string name, Action action)
-            {
-                var button = new Button(action);
-                button.text = name;
-                _toolbar.Add(button);
             }
         }
 
@@ -85,6 +87,9 @@ namespace Daniell.Editor.DialogueNodes
         {
             if (_toolbar != null)
             {
+                _toolbar.OnDialogueFileLoaded -= OnDialogueFileValueChanged;
+                _toolbar.OnSaveButtonPressed -= Save;
+
                 rootVisualElement.Remove(_toolbar);
             }
         }
@@ -131,10 +136,8 @@ namespace Daniell.Editor.DialogueNodes
 
         #endregion
 
-        /// <summary>
-        /// Called when the dialogue file value has changed
-        /// </summary>
-        /// <param name="dialogueFile">New Dialogue file</param>
+        #region Event Callbacks
+
         private void OnDialogueFileValueChanged(DialogueFile dialogueFile)
         {
             // Cache value
@@ -145,7 +148,6 @@ namespace Daniell.Editor.DialogueNodes
                 // Create the graph
                 CreateGraphView();
 
-                // Load the graph
                 Load();
             }
             else
@@ -155,155 +157,124 @@ namespace Daniell.Editor.DialogueNodes
             }
         }
 
-        #region Save / Load
+        #endregion
 
-        private void Save()
+        #region Save & Load
+
+        public void Save()
         {
-            // Get Nodes
-            List<BaseNode> nodes = _graphView.nodes.ToList().Cast<BaseNode>().ToList();
+            // List all the nodes in the graphview
+            _dialogueFile.ClearData();
 
-            // Clear dialogue file refs
-            _dialogueFile.Clear();
-
-            // Get Node Data from nodes and add to the dialogue file
-            for (int i = 0; i < nodes.Count; i++)
+            foreach (BaseNode node in Nodes)
             {
-                BaseNode node = nodes[i];
+                // Create a new save data bundle with node GUID
+                SaveDataBundle dataBundle = new SaveDataBundle(node.GUID);
+                node.SaveNodeData(dataBundle);
 
-                switch (node)
+                // Save node connection infos in data bundle
+                foreach (var connectedGUID in node.Ports.GetConnectedGUIDs())
                 {
-                    // If the node is a regular dialogue node
-                    case GraphNode graphNode:
-
-                        // Get node data
-                        GraphNodeData nodeData = graphNode.ToNodeData();
-
-                        // Create the new scriptable object and add to the dialogue file
-                        if (nodeData != null)
-                        {
-                            // Set sciptable node data name
-                            nodeData.name = nodeData.GetType().Name;
-                            _dialogueFile.AddNodeData(nodeData);
-                        }
-
-                        // Break
-                        break;
-
-                    // If the node is the Start Node
-                    case StartNode startNode:
-
-                        Dictionary<string, string> connectedGUIDs = startNode.GetConnectedGUIDs();
-
-                        // Set default value
-                        _dialogueFile.StartNodeConnectedGUID = null;
-
-                        if (connectedGUIDs.Count > 0)
-                        {
-                            KeyValuePair<string, string> connectedGUID = connectedGUIDs.First();
-                            if (connectedGUID.Value != null)
-                            {
-                                _dialogueFile.StartNodeConnectedGUID = connectedGUID.Value;
-                            }
-                        }
-
-                        // Break
-                        break;
-
-                    default:
-                        // Do nothing
-                        break;
+                    var portName = connectedGUID.Key;
+                    var connectedGUIDList = connectedGUID.Value;
+                    dataBundle.Set(portName, connectedGUIDList);
                 }
+
+                // Save the data bundle as json in the dialogue file
+                string bundleAsJson = JsonUtility.ToJson(dataBundle, true);
+                _dialogueFile.AddData(bundleAsJson);
             }
         }
 
-        private void Load()
+        public void Load()
         {
-            // If there is no dialogue file
-            if (_dialogueFile == null || _graphView == null)
+            for (int i = 0; i < _dialogueFile.Count; i++)
             {
-                return;
-            }
-
-            // Create nodes using sub assets
-            for (int i = 0; i < _dialogueFile.NodeDataCount; i++)
-            {
-                // Create nodes
-                GraphNodeData nodeData = _dialogueFile[i];
+                var savedData = JsonUtility.FromJson<SaveDataBundle>(_dialogueFile[i]);
 
                 // Instantiate node using reflection
                 var method = typeof(DialogueGraphView).GetMethod(nameof(DialogueGraphView.CreateNode));
-                var action = method.MakeGenericMethod(Type.GetType(nodeData.NodeTypeName));
+                var action = method.MakeGenericMethod(Type.GetType(savedData.Get<string>("Type")));
                 var node = action.Invoke(_graphView, null);
 
-                // Load node data
-                ((GraphNode)node).FromNodeData(nodeData);
-            }
+                var baseNode = (BaseNode)node;
+                baseNode.LoadNodeData(savedData);
 
-            // List nodes by GUID
-            Dictionary<string, GraphNode> nodesByGUID = new Dictionary<string, GraphNode>();
-            List<BaseNode> nodes = _graphView.nodes.ToList().Cast<BaseNode>().ToList();
 
-            // Find all nodes and add to GUID list
-            for (int i = 0; i < nodes.Count; i++)
-            {
-                BaseNode node = nodes[i];
 
-                // If this node is saveable
-                if (node is GraphNode graphNode)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                // Load node connection infos
+                var nodePortIDs = baseNode.Ports.GetPortIDs();
+
+                // Load the connections for each port
+                for (int j = 0; j < nodePortIDs.Length; i++)
                 {
-                    nodesByGUID.Add(graphNode.GUID, graphNode);
+                    var nodePortID = nodePortIDs[i];
+
+                    if (savedData.ContainsKey(nodePortID))
+                    {
+                        var portConnectedGUIDs = savedData.Get<string[]>(nodePortID);
+
+                        // Find and connect to each node
+                        for (int k = 0; k < portConnectedGUIDs.Length; k++)
+                        {
+
+                        }
+                    }
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            }
+        }
+
+        #endregion
+
+        #region Helpers
+
+        public BaseNode FindNodeByGUID(string guid)
+        {
+            foreach (BaseNode node in Nodes)
+            {
+                if (node.GUID == guid)
+                {
+                    return node;
                 }
             }
 
-            // Create connections
-            for (int i = 0; i < _dialogueFile.NodeDataCount; i++)
-            {
-                GraphNodeData nodeData = _dialogueFile[i];
-
-                for (int j = 0; j < nodeData.ConnectedGUIDs.Count; j++)
-                {
-                    var connectedGUID = nodeData.ConnectedGUIDs[j];
-
-                    // Skip null or empty GUIDs
-                    if (connectedGUID.Value == null || connectedGUID.Value == "")
-                        continue;
-
-                    GraphNode inputNode = nodesByGUID[nodeData.GUID];
-                    GraphNode outputNode = nodesByGUID[connectedGUID.Value];
-
-                    // Find input port on the output node
-                    var inputPort = outputNode.GetDefaultInputPort();
-
-                    // Find output port on the input node
-                    var outputPort = inputNode.GetPorts(Direction.Output).First(x => x.portName == connectedGUID.Key);
-
-                    // Connect nodes
-                    ConnectPorts(inputPort, outputPort);
-                }
-            }
-
-            // If there is connection to the start node
-            if (_dialogueFile.StartNodeConnectedGUID != null && _dialogueFile.StartNodeConnectedGUID != "")
-            {
-                BaseNode startNode = nodes.Where(x => x is StartNode).First();
-                GraphNode nextToStartNode = nodesByGUID[_dialogueFile.StartNodeConnectedGUID];
-                // Connect start node port and its connected node
-                ConnectPorts(nextToStartNode.GetDefaultInputPort(), startNode.GetPorts(Direction.Output).First());
-            }
-
-            void ConnectPorts(Port inputPort, Port outputPort)
-            {
-                // Create a new connection
-                Edge edge = new Edge
-                {
-                    input = inputPort,
-                    output = outputPort
-                };
-
-                outputPort.Connect(edge);
-                inputPort.Connect(edge);
-                _graphView.Add(edge);
-            }
+            return null;
         }
 
         #endregion
