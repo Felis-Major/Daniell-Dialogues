@@ -12,6 +12,13 @@ namespace Daniell.Runtime.Systems.DialogueNodes
     public class NodePortHandler : NodeElementHandler
     {
         /* ==========================
+         * > Indexer
+         * -------------------------- */
+
+        public Port this[string portID] => _ports[portID];
+
+
+        /* ==========================
          * > Private fields
          * -------------------------- */
 
@@ -133,35 +140,13 @@ namespace Daniell.Runtime.Systems.DialogueNodes
         #region Node Connections
 
         /// <summary>
-        /// Return all the connected nodes for each port
-        /// </summary>
-        /// <returns>Dictionary of portID and connected GUIDs</returns>
-        public Dictionary<string, string[]> GetConnectedGUIDs()
-        {
-            Dictionary<string, string[]> _nodeConnections = new Dictionary<string, string[]>();
-
-            foreach (var port in _ports)
-            {
-                var portName = port.Value.portName;
-                var portDirection = port.Value.direction;
-                var portConnectedGUIDs = GetConnectedNodesToPort(portName, portDirection);
-
-                _nodeConnections.Add(port.Key, portConnectedGUIDs);
-            }
-
-            return _nodeConnections;
-        }
-
-        /// <summary>
         /// Return all the nodes connected to a port
         /// </summary>
-        /// <param name="portName">Name of the port</param>
-        /// <param name="portDirection">Direction of the port</param>
-        /// <returns>List of GUIDs connected to the port</returns>
-        public string[] GetConnectedNodesToPort(string portName, Direction portDirection)
+        /// <param name="portName">ID of the port</param>
+        /// <returns>List of nodes and ports connected to the port</returns>
+        public NodePortIdentifier[] GetPortConnections(string portID)
         {
-            List<string> connectedGUIDs = new List<string>();
-            string portID = GetPortUniqueID(portName, portDirection);
+            List<NodePortIdentifier> portConnections = new List<NodePortIdentifier>();
 
             // If the port exists
             if (_ports.ContainsKey(portID))
@@ -171,19 +156,35 @@ namespace Daniell.Runtime.Systems.DialogueNodes
                 // Ensure the port is connected
                 if (port.connected)
                 {
-                    // Add each connected nodes GUIDs
                     foreach (Edge connection in port.connections)
                     {
-                        BaseNode targetNode = (BaseNode)connection.input.node;
-                        connectedGUIDs.Add(targetNode.GUID);
+                        // If the port is an input, get the output port, else reverse this
+                        Port targetPort = port.direction == Direction.Input ? connection.output : connection.input;
+                        string targetPortID = GetPortUniqueID(targetPort.portName, targetPort.direction);
+
+                        BaseNode targetNode = (BaseNode)targetPort.node;
+                        string targetNodeGUID = targetNode.GUID;
+
+                        var portIdentifier = new NodePortIdentifier(targetNodeGUID, targetPortID);
+                        portConnections.Add(portIdentifier);
                     }
                 }
             }
 
-            return connectedGUIDs.ToArray();
+            return portConnections.ToArray();
         }
 
         #endregion
+
+        /// <summary>
+        /// Does this port ID exist?
+        /// </summary>
+        /// <param name="portID">Port ID to look for</param>
+        /// <returns>True if the port ID exists</returns>
+        public bool HasPort(string portID)
+        {
+            return _ports.ContainsKey(portID);
+        }
 
         /// <summary>
         /// Get node ports IDs

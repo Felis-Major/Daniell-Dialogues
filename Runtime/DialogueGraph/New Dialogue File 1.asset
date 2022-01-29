@@ -32,40 +32,26 @@ MonoBehaviour:
   m_Name: New Dialogue File 1
   m_EditorClassIdentifier: 
   _data:
-  - "{\n    \"_guid\": \"36633217-21f2-48d1-bd8b-1ede37d36556\",\n    \"_saveDataBundle\":
-    [\n        {\n            \"_key\": \"GUID\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"36633217-21f2-48d1-bd8b-1ede37d36556\\\"}\"\n       
+  - "{\n    \"_guid\": \"4a62803a-ff07-448f-a268-25910ddc4fbc\",\n    \"_saveDataBundle\":
+    [\n        {\n            \"_key\": \"GUID\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"4a62803a-ff07-448f-a268-25910ddc4fbc\\\"}\"\n       
     },\n        {\n            \"_key\": \"Position\",\n            \"_jsonData\":
     \"{\\\"value\\\":{\\\"x\\\":50.0,\\\"y\\\":50.0}}\"\n        },\n        {\n           
     \"_key\": \"Type\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"Daniell.Runtime.Systems.DialogueNodes.StartNode,
     Daniell-Dialogues.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null\\\"}\"\n       
-    },\n        {\n            \"_key\": \"Output>Next\",\n            \"_jsonData\":
-    \"{\\\"value\\\":[\\\"0e071fad-6c63-4d9a-be5d-06c7d22b90bd\\\"]}\"\n        }\n   
-    ]\n}"
-  - "{\n    \"_guid\": \"c86c5c10-d7c9-4abd-8794-ddbe4be1f18d\",\n    \"_saveDataBundle\":
-    [\n        {\n            \"_key\": \"GUID\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"c86c5c10-d7c9-4abd-8794-ddbe4be1f18d\\\"}\"\n       
-    },\n        {\n            \"_key\": \"Position\",\n            \"_jsonData\":
-    \"{\\\"value\\\":{\\\"x\\\":625.0,\\\"y\\\":150.0}}\"\n        },\n        {\n           
-    \"_key\": \"Type\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"Daniell.Runtime.Systems.DialogueNodes.DialogueLineNode,
-    Daniell-Dialogues.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null\\\"}\"\n       
-    },\n        {\n            \"_key\": \"Input>Input\",\n            \"_jsonData\":
-    \"{\\\"value\\\":[\\\"c86c5c10-d7c9-4abd-8794-ddbe4be1f18d\\\"]}\"\n        },\n       
-    {\n            \"_key\": \"Output>Next\",\n            \"_jsonData\": \"{\\\"value\\\":[]}\"\n       
-    },\n        {\n            \"_key\": \"Speaker\",\n            \"_jsonData\":
-    \"{\\\"value\\\":{\\\"instanceID\\\":0}}\"\n        },\n        {\n           
-    \"_key\": \"Line\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"wwwwwwwwwwwwwwww\\\"}\"\n       
+    },\n        {\n            \"_key\": \"Connections\",\n            \"_jsonData\":
+    \"{\\\"value\\\":[{\\\"_connectionOrigin\\\":{\\\"_nodeGUID\\\":\\\"4a62803a-ff07-448f-a268-25910ddc4fbc\\\",\\\"_portID\\\":\\\"Output>Next\\\"},\\\"_connectionTarget\\\":{\\\"_nodeGUID\\\":\\\"4b11ea54-ef6f-4cb5-8e07-2b03773ce01f\\\",\\\"_portID\\\":\\\"Input>Input\\\"}}]}\"\n       
     }\n    ]\n}"
-  - "{\n    \"_guid\": \"0e071fad-6c63-4d9a-be5d-06c7d22b90bd\",\n    \"_saveDataBundle\":
-    [\n        {\n            \"_key\": \"GUID\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"0e071fad-6c63-4d9a-be5d-06c7d22b90bd\\\"}\"\n       
+  - "{\n    \"_guid\": \"4b11ea54-ef6f-4cb5-8e07-2b03773ce01f\",\n    \"_saveDataBundle\":
+    [\n        {\n            \"_key\": \"GUID\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"4b11ea54-ef6f-4cb5-8e07-2b03773ce01f\\\"}\"\n       
     },\n        {\n            \"_key\": \"Position\",\n            \"_jsonData\":
-    \"{\\\"value\\\":{\\\"x\\\":225.0,\\\"y\\\":0.0}}\"\n        },\n        {\n           
+    \"{\\\"value\\\":{\\\"x\\\":300.0,\\\"y\\\":25.0}}\"\n        },\n        {\n           
     \"_key\": \"Type\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"Daniell.Runtime.Systems.DialogueNodes.DialogueLineNode,
     Daniell-Dialogues.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null\\\"}\"\n       
-    },\n        {\n            \"_key\": \"Input>Input\",\n            \"_jsonData\":
-    \"{\\\"value\\\":[\\\"0e071fad-6c63-4d9a-be5d-06c7d22b90bd\\\"]}\"\n        },\n       
-    {\n            \"_key\": \"Output>Next\",\n            \"_jsonData\": \"{\\\"value\\\":[\\\"c86c5c10-d7c9-4abd-8794-ddbe4be1f18d\\\"]}\"\n       
     },\n        {\n            \"_key\": \"Speaker\",\n            \"_jsonData\":
     \"{\\\"value\\\":{\\\"instanceID\\\":0}}\"\n        },\n        {\n           
-    \"_key\": \"Line\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"ddddd\\\"}\"\n       
+    \"_key\": \"Line\",\n            \"_jsonData\": \"{\\\"value\\\":\\\"\\\"}\"\n       
+    },\n        {\n            \"_key\": \"Connections\",\n            \"_jsonData\":
+    \"{\\\"value\\\":[{\\\"_connectionOrigin\\\":{\\\"_nodeGUID\\\":\\\"4b11ea54-ef6f-4cb5-8e07-2b03773ce01f\\\",\\\"_portID\\\":\\\"Input>Input\\\"},\\\"_connectionTarget\\\":{\\\"_nodeGUID\\\":\\\"4a62803a-ff07-448f-a268-25910ddc4fbc\\\",\\\"_portID\\\":\\\"Output>Next\\\"}}]}\"\n       
     }\n    ]\n}"
 --- !u!114 &8243890408550130980
 MonoBehaviour:

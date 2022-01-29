@@ -1,9 +1,11 @@
-﻿using Daniell.Runtime.Systems.DialogueNodes;
+﻿using Daniell.Runtime.Helpers.Reflection;
+using Daniell.Runtime.Systems.DialogueNodes;
 using Daniell.Runtime.Systems.SimpleSave;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -169,100 +171,100 @@ namespace Daniell.Editor.DialogueNodes
             foreach (BaseNode node in Nodes)
             {
                 // Create a new save data bundle with node GUID
-                SaveDataBundle dataBundle = new SaveDataBundle(node.GUID);
-                node.SaveNodeData(dataBundle);
+                SaveDataBundle nodeData = new SaveDataBundle(node.GUID);
+                node.SaveNodeData(nodeData);
 
                 // Save node connection infos in data bundle
-                foreach (var connectedGUID in node.Ports.GetConnectedGUIDs())
-                {
-                    var portName = connectedGUID.Key;
-                    var connectedGUIDList = connectedGUID.Value;
-                    dataBundle.Set(portName, connectedGUIDList);
-                }
+                nodeData.Set("Connections", node.GetNodeConnections());
 
                 // Save the data bundle as json in the dialogue file
-                string bundleAsJson = JsonUtility.ToJson(dataBundle, true);
+                string bundleAsJson = JsonUtility.ToJson(nodeData, true);
                 _dialogueFile.AddData(bundleAsJson);
             }
         }
 
         public void Load()
         {
+            List<NodeConnection> nodeConnections = new List<NodeConnection>();
+
+            // Create nodes and load connections
             for (int i = 0; i < _dialogueFile.Count; i++)
             {
-                var savedData = JsonUtility.FromJson<SaveDataBundle>(_dialogueFile[i]);
+                var nodeData = JsonUtility.FromJson<SaveDataBundle>(_dialogueFile[i]);
 
-                // Instantiate node using reflection
-                var method = typeof(DialogueGraphView).GetMethod(nameof(DialogueGraphView.CreateNode));
-                var action = method.MakeGenericMethod(Type.GetType(savedData.Get<string>("Type")));
-                var node = action.Invoke(_graphView, null);
+                // Create the right type of node
+                string methodName = nameof(DialogueGraphView.CreateNode);
+                Type type = Type.GetType(nodeData.Get<string>("Type"));
+                var node = ReflectionHelpers.CallGenericMethod<DialogueGraphView>(methodName, _graphView, null, type);
 
                 var baseNode = (BaseNode)node;
-                baseNode.LoadNodeData(savedData);
+                baseNode.LoadNodeData(nodeData);
 
+                // Load connections
+                nodeConnections.AddRange(nodeData.Get<NodeConnection[]>("Connections"));
+            }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                // Load node connection infos
-                var nodePortIDs = baseNode.Ports.GetPortIDs();
-
-                // Load the connections for each port
-                for (int j = 0; j < nodePortIDs.Length; i++)
-                {
-                    var nodePortID = nodePortIDs[i];
-
-                    if (savedData.ContainsKey(nodePortID))
-                    {
-                        var portConnectedGUIDs = savedData.Get<string[]>(nodePortID);
-
-                        // Find and connect to each node
-                        for (int k = 0; k < portConnectedGUIDs.Length; k++)
-                        {
-
-                        }
-                    }
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            // Connect nodes
+            for (int i = 0; i < nodeConnections.Count; i++)
+            {
+                var nodeConnection = nodeConnections[i];
+                ConnectNodes(nodeConnection);
             }
         }
 
         #endregion
 
         #region Helpers
+
+        private void ConnectNodes(NodeConnection nodeConnection)
+        {
+            GetNodeAndPortFromIdentifier(nodeConnection.ConnectionOrigin, out BaseNode _, out Port originPort);
+            GetNodeAndPortFromIdentifier(nodeConnection.ConnectionTarget, out BaseNode _, out Port targetPort);
+
+            // Do not execute if ports are connected
+            if(ArePortsConnected(originPort, targetPort))
+            {
+                return;
+            }
+
+            // Create a new edge
+            Edge edge = new Edge
+            {
+                input = originPort.direction == Direction.Input ? originPort : targetPort,
+                output = targetPort.direction == Direction.Output ? targetPort : originPort
+            };
+
+            // Connect edge to ports
+            originPort.Connect(edge);
+            targetPort.Connect(edge);
+
+            // Add edge to the graph view
+            _graphView.Add(edge);
+        }
+
+        private bool ArePortsConnected(Port origin, Port target)
+        {
+            if (!origin.connected || !target.connected)
+            {
+                return false;
+            }
+
+            foreach (var connection in origin.connections)
+            {
+                if(connection.input == target || connection.output == target)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void GetNodeAndPortFromIdentifier(NodePortIdentifier nodePortIdentifier, out BaseNode node, out Port port)
+        {
+            node = FindNodeByGUID(nodePortIdentifier.NodeGUID);
+            port = node.GetPortByID(nodePortIdentifier.PortID);
+        }
 
         public BaseNode FindNodeByGUID(string guid)
         {

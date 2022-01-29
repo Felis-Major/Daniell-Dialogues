@@ -1,6 +1,7 @@
 ﻿using Daniell.Runtime.Helpers.Reflection;
 using Daniell.Runtime.Systems.SimpleSave;
 using System;
+using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -58,15 +59,13 @@ namespace Daniell.Runtime.Systems.DialogueNodes
         /// </summary>
         public Vector2 Position { get; private set; }
 
-        /// <summary>
-        /// Handler for the node ports
-        /// </summary>
-        public NodePortHandler Ports { get; private set; }
 
-        /// <summary>
-        /// Handler for the node fields
-        /// </summary>
-        public NodeFieldHandler Fields { get; private set; }
+        /* ==========================
+         * > Private Fields
+         * -------------------------- */
+
+        protected readonly NodePortHandler _nodePortHandler;
+        protected readonly NodeFieldHandler _nodeFieldHandler;
 
 
         /* ==========================
@@ -79,8 +78,8 @@ namespace Daniell.Runtime.Systems.DialogueNodes
             SetNodeAttributes();
 
             // Create handlers
-            Ports = new NodePortHandler(this);
-            Fields = new NodeFieldHandler(this);
+            _nodePortHandler = new NodePortHandler(this);
+            _nodeFieldHandler = new NodeFieldHandler(this);
 
             // Assign new GUID
             GUID = Guid.NewGuid().ToString();
@@ -199,5 +198,48 @@ namespace Daniell.Runtime.Systems.DialogueNodes
         }
 
         #endregion
+
+        /// <summary>
+        /// Get all connections to this node
+        /// </summary>
+        /// <returns>List of Node Connections originating from this node</returns>
+        public NodeConnection[] GetNodeConnections()
+        {
+            List<NodeConnection> nodeConnections = new List<NodeConnection>();
+
+            // Find and create connections to all port ids
+            string[] portIDs = _nodePortHandler.GetPortIDs();
+
+            for (int i = 0; i < portIDs.Length; i++)
+            {
+                var portID = portIDs[i];
+                var nodePortIdentifiers = _nodePortHandler.GetPortConnections(portID);
+
+                for (int j = 0; j < nodePortIdentifiers.Length; j++)
+                {
+                    var targetPortIdentifier = nodePortIdentifiers[j];
+                    var originPortIdentifier = new NodePortIdentifier(GUID, portID);
+                    var nodeConnection = new NodeConnection(originPortIdentifier, targetPortIdentifier);
+                    nodeConnections.Add(nodeConnection);
+                }
+            }
+
+            return nodeConnections.ToArray();
+        }
+
+        /// <summary>
+        /// Return a port by ID from this node
+        /// </summary>
+        /// <param name="portID">ID of the port to look for</param>
+        /// <returns>Port with matching ID or null if not found</returns>
+        public Port GetPortByID(string portID)
+        {
+            if (_nodePortHandler.HasPort(portID))
+            {
+                return _nodePortHandler[portID];
+            }
+
+            return null;
+        }
     }
 }

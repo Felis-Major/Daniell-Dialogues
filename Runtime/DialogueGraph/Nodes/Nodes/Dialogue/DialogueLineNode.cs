@@ -31,12 +31,12 @@ namespace Daniell.Runtime.Systems.DialogueNodes
         public DialogueLineNode()
         {
             // Add Ports
-            Ports.AddInputPort("Input");
-            Ports.AddOutputPort("Next");
+            _nodePortHandler.AddInputPort("Input");
+            _nodePortHandler.AddOutputPort("Next");
 
             // Add parameter fields and link to variables
-            Fields.AddField(new ObjectNodeField<Character>("Speaker"), SPEAKER_FIELD_NAME);
-            Fields.AddField(new StringNodeField("Line", true), LINE_FIELD_NAME);
+            _nodeFieldHandler.AddField(new ObjectNodeField<Character>("Speaker"), SPEAKER_FIELD_NAME);
+            _nodeFieldHandler.AddField(new StringNodeField("Line", true), LINE_FIELD_NAME);
         }
 
 
@@ -53,10 +53,10 @@ namespace Daniell.Runtime.Systems.DialogueNodes
         {
             base.SaveNodeData(nodeSaveData);
 
-            var speaker = Fields.GetFieldValue<Character>(SPEAKER_FIELD_NAME);
+            var speaker = _nodeFieldHandler.GetFieldValue<Character>(SPEAKER_FIELD_NAME);
             nodeSaveData.Set("Speaker", speaker);
 
-            var line = Fields.GetFieldValue<string>(LINE_FIELD_NAME);
+            var line = _nodeFieldHandler.GetFieldValue<string>(LINE_FIELD_NAME);
             nodeSaveData.Set("Line", line);
         }
 
@@ -68,10 +68,10 @@ namespace Daniell.Runtime.Systems.DialogueNodes
             base.LoadNodeData(nodeSaveData);
 
             var speaker = nodeSaveData.Get<Character>("Speaker");
-            Fields.SetFieldValue(SPEAKER_FIELD_NAME, speaker);
+            _nodeFieldHandler.SetFieldValue(SPEAKER_FIELD_NAME, speaker);
 
             var line = nodeSaveData.Get<string>("Line");
-            Fields.SetFieldValue(LINE_FIELD_NAME, line);
+            _nodeFieldHandler.SetFieldValue(LINE_FIELD_NAME, line);
         }
 
         #endregion

@@ -18,7 +18,7 @@ namespace Daniell.Runtime.Systems.DialogueNodes
 
         public StartNode()
         {
-            Ports.AddOutputPort("Next");
+            _nodePortHandler.AddOutputPort("Next");
         }
 
 
