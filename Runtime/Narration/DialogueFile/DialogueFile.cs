@@ -8,6 +8,8 @@ using UnityEditor;
 namespace Daniell.Runtime.Systems.DialogueNodes
 {
     [CreateAssetMenu]
+    [SupportedNodeType(typeof(DialogueLineRuntimeNode))]
+    [SupportedNodeType(typeof(CallEventRuntimeNode))]
     public class DialogueFile : ScriptableObject
     {
         public IEnumerable<RuntimeNode> Nodes => _nodes;

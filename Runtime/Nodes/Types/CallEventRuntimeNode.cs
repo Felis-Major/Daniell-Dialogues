@@ -1,11 +1,9 @@
-﻿using UnityEngine;
+﻿using Daniell.Runtime.Systems.Events;
+using UnityEngine;
 
 namespace Daniell.Runtime.Systems.DialogueNodes
 {
-    /// <summary>
-    /// Runtime version of a Dialogue Line Node
-    /// </summary>
-    public class DialogueLineRuntimeNode : RuntimeNode
+    public class CallEventRuntimeNode : RuntimeNode
     {
         /* ==========================
          * > Constants
@@ -24,12 +22,7 @@ namespace Daniell.Runtime.Systems.DialogueNodes
         /// <summary>
         /// Actor for this dialogue node
         /// </summary>
-        public DialogueActor Actor { get => _actor; set => _actor = value; }
-
-        /// <summary>
-        /// Line for this dialogue node
-        /// </summary>
-        public string Line { get => _text; set => _text = value; }
+        public VoidEvent Event { get => _event; set => _event = value; }
 
 
         /* ==========================
@@ -37,10 +30,7 @@ namespace Daniell.Runtime.Systems.DialogueNodes
          * -------------------------- */
 
         [SerializeField]
-        private DialogueActor _actor;
-
-        [SerializeField]
-        private string _text;
+        private VoidEvent _event;
 
 
         /* ==========================
@@ -56,7 +46,7 @@ namespace Daniell.Runtime.Systems.DialogueNodes
             var nodes = GetConnectedNodesToPort(NEXT_NODE_PORT, PortID.Direction.Output);
 
             // Return the first node found if there is one
-            if(nodes.Length > 0)
+            if (nodes.Length > 0)
             {
                 return nodes[0];
             }

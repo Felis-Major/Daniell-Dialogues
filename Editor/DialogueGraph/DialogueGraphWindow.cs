@@ -178,14 +178,17 @@ namespace Daniell.Editor.DialogueNodes
 
             foreach (BaseNode node in Nodes)
             {
+                var nodeTypeAttribute = ReflectionHelpers.GetAttributeForType<RuntimeNodeTypeAttribute>(node.GetType());
+                var runtimeNodeType = nodeTypeAttribute.Type;
+
                 // Skip nodes that don't have runtime types
-                if (node.RuntimeNodeType == null)
+                if (runtimeNodeType == null)
                 {
                     continue;
                 }
 
                 // Create a new runtime node
-                var runtimeNode = (RuntimeNode)CreateInstance(node.RuntimeNodeType);
+                var runtimeNode = (RuntimeNode)CreateInstance(runtimeNodeType);
                 runtimeNode.name = $"{node.NodeName } - {node.GUID}";
 
                 // Save node data
@@ -224,9 +227,9 @@ namespace Daniell.Editor.DialogueNodes
                 string methodName = nameof(DialogueGraphView.CreateNode);
                 Type type = Type.GetType(runtimeNode.NodeTypeName);
                 var node = (BaseNode)ReflectionHelpers.CallGenericMethod<DialogueGraphView>(
-                    methodName, 
-                    _graphView, 
-                    null, 
+                    methodName,
+                    _graphView,
+                    null,
                     type);
 
                 // Load node data
@@ -258,7 +261,7 @@ namespace Daniell.Editor.DialogueNodes
             var targetPort = FindNodeByGUID(targetPortID.NodeGUID)?.FindPort(targetPortID);
 
             // Do not execute if ports are null
-            if(originPort == null || targetPort == null)
+            if (originPort == null || targetPort == null)
             {
                 return;
             }

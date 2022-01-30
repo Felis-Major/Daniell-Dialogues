@@ -16,6 +16,11 @@ public class DialogueReader : MonoBehaviour
                 print($"{node.Actor.Name} says: {node.Line}");
             }
 
+            if(currentNode is CallEventRuntimeNode eventNode)
+            {
+                eventNode.Event.Raise();
+            }
+
             currentNode = currentNode.GetNextNode();
         }
     }
