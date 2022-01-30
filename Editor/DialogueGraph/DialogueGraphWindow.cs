@@ -258,6 +258,12 @@ namespace Daniell.Editor.DialogueNodes
             var originPort = FindNodeByGUID(originPortID.NodeGUID)?.FindPort(originPortID);
             var targetPort = FindNodeByGUID(targetPortID.NodeGUID)?.FindPort(targetPortID);
 
+            // Do not execute if ports are null
+            if(originPort == null || targetPort == null)
+            {
+                return;
+            }
+
             // Do not execute if ports are connected
             if (ArePortsConnected(originPort, targetPort))
             {
