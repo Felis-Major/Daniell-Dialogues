@@ -1,4 +1,5 @@
-﻿using Daniell.Runtime.Systems.DialogueNodes;
+﻿using Daniell.Editor.Systems.DialogueNodes;
+using Daniell.Runtime.Systems.DialogueNodes;
 using System;
 using UnityEditor;
 using UnityEditor.UIElements;

@@ -1,6 +1,6 @@
-﻿using Daniell.Runtime.Helpers.Reflection;
+﻿using Daniell.Editor.Systems.DialogueNodes;
+using Daniell.Runtime.Helpers.Reflection;
 using Daniell.Runtime.Systems.DialogueNodes;
-using Daniell.Runtime.Systems.SimpleSave;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +8,7 @@ using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static Daniell.Runtime.Systems.DialogueNodes.RuntimeNode;
 
 namespace Daniell.Editor.DialogueNodes
 {
@@ -168,32 +169,39 @@ namespace Daniell.Editor.DialogueNodes
         /// </summary>
         public void Save()
         {
-            if(_dialogueFile == null)
+            if (_dialogueFile == null)
             {
                 return;
             }
 
             // List all the nodes in the graphview
-            _dialogueFile.ClearData();
+            _dialogueFile.ClearNodes();
 
             foreach (BaseNode node in Nodes)
             {
-                // Create a new save data bundle with node GUID
-                SaveDataBundle nodeData = new SaveDataBundle(node.GUID);
-                node.SaveNodeData(nodeData);
+                // Skip nodes that don't have runtime types
+                if (node.RuntimeNodeType == null)
+                {
+                    continue;
+                }
 
-                // Save node connection infos in data bundle
-                nodeData.Set("Connections", node.GetNodeConnections());
+                // Create a new runtime node
+                var runtimeNode = (RuntimeNode)CreateInstance(node.RuntimeNodeType);
+                runtimeNode.name = $"{node.NodeName } - {node.GUID}";
 
-                // Save the data bundle as json in the dialogue file
-                string bundleAsJson = JsonUtility.ToJson(nodeData, true);
-                _dialogueFile.AddData(bundleAsJson);
-            }
+                // Save node data
+                node.SaveNodeData(runtimeNode);
 
-            if (_dialogueFile != null)
-            {
-                EditorUtility.SetDirty(_dialogueFile);
-                AssetDatabase.SaveAssets();
+                // Save node connections
+                runtimeNode.ClearConnections();
+
+                foreach (var connection in node.GetConnections())
+                {
+                    runtimeNode.AddConnection(connection);
+                }
+
+                // Add new runtime node to the dialogue file
+                _dialogueFile.AddNode(runtimeNode);
             }
         }
 
@@ -203,35 +211,37 @@ namespace Daniell.Editor.DialogueNodes
         public void Load()
         {
             // Do not continue if there is no dialogue file
-            if(_dialogueFile == null)
+            if (_dialogueFile == null)
             {
                 return;
             }
 
-            List<NodeConnection> nodeConnections = new List<NodeConnection>();
+            List<PortConnection> connections = new List<PortConnection>();
 
-            // Create nodes and load connections
-            for (int i = 0; i < _dialogueFile.Count; i++)
+            // Load all the nodes
+            foreach (RuntimeNode runtimeNode in _dialogueFile.Nodes)
             {
-                var nodeData = JsonUtility.FromJson<SaveDataBundle>(_dialogueFile[i]);
-
                 // Create the right type of node
                 string methodName = nameof(DialogueGraphView.CreateNode);
-                Type type = Type.GetType(nodeData.Get<string>("Type"));
-                var node = ReflectionHelpers.CallGenericMethod<DialogueGraphView>(methodName, _graphView, null, type);
+                Type type = Type.GetType(runtimeNode.NodeTypeName);
+                var node = (BaseNode)ReflectionHelpers.CallGenericMethod<DialogueGraphView>(
+                    methodName, 
+                    _graphView, 
+                    null, 
+                    type);
 
-                var baseNode = (BaseNode)node;
-                baseNode.LoadNodeData(nodeData);
+                // Load node data
+                node.LoadNodeData(runtimeNode);
 
-                // Load connections
-                nodeConnections.AddRange(nodeData.Get<NodeConnection[]>("Connections"));
+                // Load node connections
+                connections.AddRange(runtimeNode.Connections);
             }
 
             // Connect nodes
-            for (int i = 0; i < nodeConnections.Count; i++)
+            for (int i = 0; i < connections.Count; i++)
             {
-                var nodeConnection = nodeConnections[i];
-                ConnectNodes(nodeConnection);
+                var portConnection = connections[i];
+                ConnectPorts(portConnection.OriginPort, portConnection.TargetPort);
             }
         }
 
@@ -243,13 +253,13 @@ namespace Daniell.Editor.DialogueNodes
         /// Connect two ports together
         /// </summary>
         /// <param name="nodeConnection">Node connection infos</param>
-        private void ConnectNodes(NodeConnection nodeConnection)
+        private void ConnectPorts(PortID originPortID, PortID targetPortID)
         {
-            GetNodeAndPortFromIdentifier(nodeConnection.ConnectionOrigin, out BaseNode _, out Port originPort);
-            GetNodeAndPortFromIdentifier(nodeConnection.ConnectionTarget, out BaseNode _, out Port targetPort);
+            var originPort = FindNodeByGUID(originPortID.NodeGUID)?.FindPort(originPortID);
+            var targetPort = FindNodeByGUID(targetPortID.NodeGUID)?.FindPort(targetPortID);
 
             // Do not execute if ports are connected
-            if(ArePortsConnected(originPort, targetPort))
+            if (ArePortsConnected(originPort, targetPort))
             {
                 return;
             }
@@ -284,25 +294,13 @@ namespace Daniell.Editor.DialogueNodes
 
             foreach (var connection in origin.connections)
             {
-                if(connection.input == target || connection.output == target)
+                if (connection.input == target || connection.output == target)
                 {
                     return true;
                 }
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// Outputs a node and a port from an identifier
-        /// </summary>
-        /// <param name="nodePortID">Node Port infos</param>
-        /// <param name="node">Node with matching GUID</param>
-        /// <param name="port">Port with matching ID</param>
-        private void GetNodeAndPortFromIdentifier(NodePortIdentifier nodePortID, out BaseNode node, out Port port)
-        {
-            node = FindNodeByGUID(nodePortID.NodeGUID);
-            port = node.GetPortByID(nodePortID.PortID);
         }
 
         /// <summary>

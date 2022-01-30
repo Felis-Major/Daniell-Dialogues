@@ -1,4 +1,4 @@
-﻿using Daniell.Runtime.Systems.DialogueNodes;
+﻿using Daniell.Editor.Systems.DialogueNodes;
 using System;
 using System.Collections.Generic;
 using System.Reflection;

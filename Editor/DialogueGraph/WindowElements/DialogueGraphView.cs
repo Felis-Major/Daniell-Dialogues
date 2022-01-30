@@ -1,11 +1,12 @@
 using Daniell.Runtime.Helpers.Reflection;
-using Daniell.Runtime.Systems.DialogueNodes;
+using Daniell.Editor.Systems.DialogueNodes;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Daniell.Runtime.Systems.DialogueNodes;
 
 namespace Daniell.Editor.DialogueNodes
 {
@@ -79,7 +80,7 @@ namespace Daniell.Editor.DialogueNodes
         private void SetupSearchWindow()
         {
             _searchWindow = ScriptableObject.CreateInstance<DialogueGraphSearchWindow>();
-            _searchWindow.Initialize(_parent, this, _dialogueFile.GetValidNodeTypes());
+            _searchWindow.Initialize(_parent, this, new Dictionary<System.Type, string> { { typeof(DialogueLineNode), "Dialogue Line" } });
 
             nodeCreationRequest = context =>
             {

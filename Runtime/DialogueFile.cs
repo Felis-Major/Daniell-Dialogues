@@ -1,38 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Daniell.Runtime.Helpers.DataStructures;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Daniell.Runtime.Systems.DialogueNodes
 {
     [CreateAssetMenu]
     public class DialogueFile : ScriptableObject
     {
+        public IEnumerable<RuntimeNode> Nodes => _nodes;
+
         [SerializeField]
-        private List<string> _data = new List<string>();
+        private List<RuntimeNode> _nodes = new List<RuntimeNode>();
 
-        public string this[int i]=>_data[i];
+#if UNITY_EDITOR
 
-        public int Count => _data.Count;
-
-        public void ClearData()
+        public void AddNode<T>(T runtimeNodeInstance) where T : RuntimeNode
         {
-            _data.Clear();
+            // Cache data as dictionary
+            _nodes.Add(runtimeNodeInstance);
+
+            // Add node to this file
+            AssetDatabase.AddObjectToAsset(runtimeNodeInstance, this);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
         }
 
-        public void AddData(string jsonData)
+        public void ClearNodes()
         {
-            _data.Add(jsonData);
+            for (int i = 0; i < _nodes.Count; i++)
+            {
+                AssetDatabase.RemoveObjectFromAsset(_nodes[i]);
+                EditorUtility.SetDirty(this);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+            }
+
+            _nodes.Clear();
         }
 
-        /// <summary>
-        /// Get valid nodes for this file
-        /// </summary>
-        /// <returns>List of valid types for this file</returns>
-        public virtual Dictionary<Type, string> GetValidNodeTypes()
-        {
-            return new Dictionary<Type, string> {
-                { typeof(DialogueLineNode), "Dialogue Line" }
-            };
-        }
+#endif
     }
 }
