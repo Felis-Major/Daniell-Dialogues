@@ -1,4 +1,5 @@
 ﻿using Daniell.Editor.Systems.DialogueNodes;
+using Daniell.Runtime.Helpers.Reflection;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -21,14 +22,14 @@ namespace Daniell.Editor.DialogueNodes
 
         private EditorWindow _editorWindow;
         private DialogueGraphView _graphView;
-        private Dictionary<Type, string> _validNodeTypes;
+        private List<Type> _validNodeTypes;
 
 
         /* ==========================
          * > Methods
          * -------------------------- */
 
-        public void Initialize(EditorWindow editorWindow, DialogueGraphView dialogueGraphView, Dictionary<Type, string> validNodeTypes)
+        public void Initialize(EditorWindow editorWindow, DialogueGraphView dialogueGraphView, List<Type> validNodeTypes)
         {
             _editorWindow = editorWindow;
             _graphView = dialogueGraphView;
@@ -60,9 +61,12 @@ namespace Daniell.Editor.DialogueNodes
 
             // Find groups
             List<string> createdGroups = new List<string>();
-            foreach (KeyValuePair<Type, string> validNodeType in _validNodeTypes)
+
+            foreach (Type validNodeType in _validNodeTypes)
             {
-                var groupName = validNodeType.Value;
+                var nodeNameAttribute = ReflectionHelpers.GetAttributeForType<NodeNameAttribute>(validNodeType);
+
+                string groupName = nodeNameAttribute.Name;
                 if (!createdGroups.Contains(groupName))
                 {
                     searchTreeEntries.Add(GetGroup(groupName, 1));
@@ -71,7 +75,7 @@ namespace Daniell.Editor.DialogueNodes
 
                 // Create groups
                 var method = typeof(DialogueGraphSearchWindow).GetMethod(nameof(DialogueGraphSearchWindow.GetEntry), BindingFlags.NonPublic | BindingFlags.Instance);
-                var action = method.MakeGenericMethod(validNodeType.Key);
+                var action = method.MakeGenericMethod(validNodeType);
                 var entry = action.Invoke(this, new object[] { 2 });
                 searchTreeEntries.Add(((SearchTreeEntry)entry));
             }

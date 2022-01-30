@@ -10,18 +10,9 @@ namespace Daniell.Editor.Systems.DialogueNodes
     [NodeColor(60, 130, 60)]
     [NodeWidth(3)]
     [SingleInstanceNode]
+    [RuntimeNodeType(typeof(StartRuntimeNode))]
     public class StartNode : BaseNode
     {
-        /* ==========================
-         * > Properties
-         * -------------------------- */
-
-        /// <summary>
-        /// <inheritdoc/>
-        /// </summary>
-        public override Type RuntimeNodeType => typeof(StartRuntimeNode);
-
-
         /* ==========================
          * > Constructors
          * -------------------------- */

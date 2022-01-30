@@ -7,6 +7,7 @@ namespace Daniell.Editor.Systems.DialogueNodes
     /// </summary>
     [NodeName("Dialogue Line")]
     [NodeColor(150, 70, 80)]
+    [RuntimeNodeType(typeof(DialogueLineRuntimeNode))]
     public class DialogueLineNode : GenericBaseNode<DialogueLineRuntimeNode>
     {
         /* ==========================

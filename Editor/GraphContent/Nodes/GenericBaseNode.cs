@@ -10,16 +10,6 @@ namespace Daniell.Editor.Systems.DialogueNodes
     public abstract class GenericBaseNode<T> : BaseNode where T : RuntimeNode
     {
         /* ==========================
-         * > Properties
-         * -------------------------- */
-
-        /// <summary>
-        /// <inheritdoc/>
-        /// </summary>
-        public override Type RuntimeNodeType => typeof(T);
-
-
-        /* ==========================
          * > Methods
          * -------------------------- */
 

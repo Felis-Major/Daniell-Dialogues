@@ -7,6 +7,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Daniell.Runtime.Systems.DialogueNodes;
+using System;
 
 namespace Daniell.Editor.DialogueNodes
 {
@@ -80,7 +81,36 @@ namespace Daniell.Editor.DialogueNodes
         private void SetupSearchWindow()
         {
             _searchWindow = ScriptableObject.CreateInstance<DialogueGraphSearchWindow>();
-            _searchWindow.Initialize(_parent, this, new Dictionary<System.Type, string> { { typeof(DialogueLineNode), "Dialogue Line" } });
+
+            // Get the list of supported nodes
+            var dialogueFileType = _dialogueFile.GetType();
+            var supportedNodeTypeAttributes = ReflectionHelpers.GetAttributesForType<SupportedNodeTypeAttribute>(dialogueFileType);
+
+            List<Type> supportedNodeTypes = new List<Type>();
+
+            for (int i = 0; i < supportedNodeTypeAttributes.Length; i++)
+            {
+                SupportedNodeTypeAttribute attribute = supportedNodeTypeAttributes[i];
+
+                var baseNodeTypes = (
+                    from domainAssembly in AppDomain.CurrentDomain.GetAssemblies()
+                    from assemblyType in domainAssembly.GetExportedTypes()
+                    where assemblyType.IsSubclassOf(typeof(BaseNode)) && !assemblyType.IsAbstract
+                    select assemblyType).ToArray();
+
+                foreach (var baseNodeType in baseNodeTypes)
+                {
+                    var runtimeNodeTypeAttribute = ReflectionHelpers.GetAttributeForType<RuntimeNodeTypeAttribute>(baseNodeType);
+
+                    if (runtimeNodeTypeAttribute.Type == attribute.Type)
+                    {
+                        supportedNodeTypes.Add(baseNodeType);
+                        break;
+                    }
+                }
+            }
+
+            _searchWindow.Initialize(_parent, this, supportedNodeTypes);
 
             nodeCreationRequest = context =>
             {
@@ -103,12 +133,12 @@ namespace Daniell.Editor.DialogueNodes
             var singleInstanceAttribute = ReflectionHelpers.GetAttributeForType<SingleInstanceNodeAttribute>(typeof(T));
 
             // If this node can only have one instance
-            if(singleInstanceAttribute != null)
+            if (singleInstanceAttribute != null)
             {
                 // Check if a node is already loaded
                 var nodes = this.nodes.ToList().Cast<BaseNode>();
-                
-                foreach(var n in nodes)
+
+                foreach (var n in nodes)
                 {
                     if (n.GetType() == typeof(T))
                     {

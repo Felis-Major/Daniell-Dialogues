@@ -2,10 +2,8 @@
 using Daniell.Runtime.Systems.DialogueNodes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using static Daniell.Runtime.Systems.DialogueNodes.RuntimeNode;
 
 namespace Daniell.Editor.Systems.DialogueNodes
 {
@@ -60,11 +58,6 @@ namespace Daniell.Editor.Systems.DialogueNodes
         /// Position of the node
         /// </summary>
         public Vector2 GraphPosition { get; private set; }
-
-        /// <summary>
-        /// Type of the runtime node
-        /// </summary>
-        public virtual Type RuntimeNodeType => null;
 
 
         /* ==========================
