@@ -1,0 +1,182 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8078233663978274299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 836f513933de27547a343014d84edc24, type: 3}
+  m_Name: Dialogue Line - 5e3c7b94-6e1d-4b48-96ce-ca804c565ea0
+  m_EditorClassIdentifier: 
+  _nodeTypeName: Daniell.Editor.Systems.DialogueNodes.DialogueLineNode, Daniell-Dialogues.Editor,
+    Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _nodePosition: {x: 500, y: 50}
+  _guid: 5e3c7b94-6e1d-4b48-96ce-ca804c565ea0
+  _connections:
+  - _originPort:
+      _portName: Input
+      _portDirection: 0
+      _nodeGUID: 5e3c7b94-6e1d-4b48-96ce-ca804c565ea0
+    _targetPort:
+      _portName: Next
+      _portDirection: 1
+      _nodeGUID: 3464a40a-cbde-4fd1-83ef-2157770b1d9a
+  - _originPort:
+      _portName: Next
+      _portDirection: 1
+      _nodeGUID: 5e3c7b94-6e1d-4b48-96ce-ca804c565ea0
+    _targetPort:
+      _portName: Input
+      _portDirection: 0
+      _nodeGUID: c1d0b696-4ca5-4276-af7b-4e2c7fe2b899
+  _dialogueFile: {fileID: 11400000}
+  _actor: {fileID: 11400000, guid: 37f66f670c6fb724fbea665ce9b5f6e6, type: 2}
+  _text: yo
+--- !u!114 &-6697036589933689842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 836f513933de27547a343014d84edc24, type: 3}
+  m_Name: Dialogue Line - c1d0b696-4ca5-4276-af7b-4e2c7fe2b899
+  m_EditorClassIdentifier: 
+  _nodeTypeName: Daniell.Editor.Systems.DialogueNodes.DialogueLineNode, Daniell-Dialogues.Editor,
+    Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _nodePosition: {x: 150, y: 250}
+  _guid: c1d0b696-4ca5-4276-af7b-4e2c7fe2b899
+  _connections:
+  - _originPort:
+      _portName: Input
+      _portDirection: 0
+      _nodeGUID: c1d0b696-4ca5-4276-af7b-4e2c7fe2b899
+    _targetPort:
+      _portName: Next
+      _portDirection: 1
+      _nodeGUID: 5e3c7b94-6e1d-4b48-96ce-ca804c565ea0
+  - _originPort:
+      _portName: Next
+      _portDirection: 1
+      _nodeGUID: c1d0b696-4ca5-4276-af7b-4e2c7fe2b899
+    _targetPort:
+      _portName: Input
+      _portDirection: 0
+      _nodeGUID: 6f11e9ba-27d1-42f1-9225-b07b012de35f
+  _dialogueFile: {fileID: 11400000}
+  _actor: {fileID: 11400000, guid: c9d3fc8f52480db4cb1be9acf2e56c31, type: 2}
+  _text: ca va?
+--- !u!114 &-4214729595435065314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 836f513933de27547a343014d84edc24, type: 3}
+  m_Name: Dialogue Line - 6f11e9ba-27d1-42f1-9225-b07b012de35f
+  m_EditorClassIdentifier: 
+  _nodeTypeName: Daniell.Editor.Systems.DialogueNodes.DialogueLineNode, Daniell-Dialogues.Editor,
+    Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _nodePosition: {x: 500, y: 250}
+  _guid: 6f11e9ba-27d1-42f1-9225-b07b012de35f
+  _connections:
+  - _originPort:
+      _portName: Input
+      _portDirection: 0
+      _nodeGUID: 6f11e9ba-27d1-42f1-9225-b07b012de35f
+    _targetPort:
+      _portName: Next
+      _portDirection: 1
+      _nodeGUID: c1d0b696-4ca5-4276-af7b-4e2c7fe2b899
+  _dialogueFile: {fileID: 11400000}
+  _actor: {fileID: 11400000, guid: 37f66f670c6fb724fbea665ce9b5f6e6, type: 2}
+  _text: non
+--- !u!114 &-3380883431624820053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c137467e1bdac49a2d4264bb49fe3b, type: 3}
+  m_Name: Start - e50f49fb-72dd-4e03-91a2-2e3f6caa98a5
+  m_EditorClassIdentifier: 
+  _nodeTypeName: Daniell.Editor.Systems.DialogueNodes.StartNode, Daniell-Dialogues.Editor,
+    Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _nodePosition: {x: 50, y: 50}
+  _guid: e50f49fb-72dd-4e03-91a2-2e3f6caa98a5
+  _connections:
+  - _originPort:
+      _portName: Next
+      _portDirection: 1
+      _nodeGUID: e50f49fb-72dd-4e03-91a2-2e3f6caa98a5
+    _targetPort:
+      _portName: Input
+      _portDirection: 0
+      _nodeGUID: 3464a40a-cbde-4fd1-83ef-2157770b1d9a
+  _dialogueFile: {fileID: 11400000}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d37bef83845b764c9fcbbc0c0e9a520, type: 3}
+  m_Name: New Dialogue File
+  m_EditorClassIdentifier: 
+  _nodes:
+  - {fileID: -3380883431624820053}
+  - {fileID: -8078233663978274299}
+  - {fileID: -6697036589933689842}
+  - {fileID: -4214729595435065314}
+  - {fileID: 9208353317419041332}
+--- !u!114 &9208353317419041332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 836f513933de27547a343014d84edc24, type: 3}
+  m_Name: Dialogue Line - 3464a40a-cbde-4fd1-83ef-2157770b1d9a
+  m_EditorClassIdentifier: 
+  _nodeTypeName: Daniell.Editor.Systems.DialogueNodes.DialogueLineNode, Daniell-Dialogues.Editor,
+    Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _nodePosition: {x: 150, y: 50}
+  _guid: 3464a40a-cbde-4fd1-83ef-2157770b1d9a
+  _connections:
+  - _originPort:
+      _portName: Input
+      _portDirection: 0
+      _nodeGUID: 3464a40a-cbde-4fd1-83ef-2157770b1d9a
+    _targetPort:
+      _portName: Next
+      _portDirection: 1
+      _nodeGUID: e50f49fb-72dd-4e03-91a2-2e3f6caa98a5
+  - _originPort:
+      _portName: Next
+      _portDirection: 1
+      _nodeGUID: 3464a40a-cbde-4fd1-83ef-2157770b1d9a
+    _targetPort:
+      _portName: Input
+      _portDirection: 0
+      _nodeGUID: 5e3c7b94-6e1d-4b48-96ce-ca804c565ea0
+  _dialogueFile: {fileID: 11400000}
+  _actor: {fileID: 11400000, guid: c9d3fc8f52480db4cb1be9acf2e56c31, type: 2}
+  _text: salut

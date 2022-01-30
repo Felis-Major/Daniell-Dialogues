@@ -17,7 +17,7 @@ namespace Daniell.Editor.Systems.DialogueNodes
         {
             // Add Ports
             _nodePortHandler.AddInputPort("Input");
-            _nodePortHandler.AddOutputPort("Next");
+            _nodePortHandler.AddOutputPort(DialogueLineRuntimeNode.NEXT_NODE_PORT);
 
             // Add parameter fields and link to variables
             _nodeFieldHandler.AddField(new ObjectNodeField<DialogueActor>("Actor"), "Actor Field");

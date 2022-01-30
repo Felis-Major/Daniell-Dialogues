@@ -28,7 +28,7 @@ namespace Daniell.Editor.Systems.DialogueNodes
 
         public StartNode()
         {
-            _nodePortHandler.AddOutputPort("Next");
+            _nodePortHandler.AddOutputPort(StartRuntimeNode.NEXT_NODE_PORT);
         }
 
 

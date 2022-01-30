@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Daniell.Runtime.Systems.DialogueNodes
@@ -6,7 +7,7 @@ namespace Daniell.Runtime.Systems.DialogueNodes
     /// <summary>
     /// A node that can be used in Runtime Applications
     /// </summary>
-    public class RuntimeNode : ScriptableObject
+    public abstract class RuntimeNode : ScriptableObject
     {
         /* ==========================
          * > Properties
@@ -36,6 +37,11 @@ namespace Daniell.Runtime.Systems.DialogueNodes
         /// </summary>
         public IEnumerable<PortConnection> Connections => _connections;
 
+        /// <summary>
+        /// Dialogue file for this node
+        /// </summary>
+        public DialogueFile DialogueFile { get => _dialogueFile; set => _dialogueFile = value; }
+
 
         /* ==========================
          * > Private Fields
@@ -57,6 +63,9 @@ namespace Daniell.Runtime.Systems.DialogueNodes
         [SerializeField]
         private List<PortConnection> _connections = new List<PortConnection>();
 
+        [SerializeField]
+        private DialogueFile _dialogueFile;
+
 
         /* ==========================
          * > Methods
@@ -77,6 +86,44 @@ namespace Daniell.Runtime.Systems.DialogueNodes
         public void AddConnection(PortConnection nodePortID)
         {
             _connections.Add(nodePortID);
+        }
+
+        /// <summary>
+        /// Get the next node
+        /// </summary>
+        public abstract RuntimeNode GetNextNode();
+
+
+        /// <summary>
+        /// Find a pot with matching name and direction
+        /// </summary>
+        /// <param name="portName">Name of the node to look for</param>
+        /// <param name="direction">Direction of the node to look for</param>
+        protected RuntimeNode[] GetConnectedNodesToPort(string portName, PortID.Direction direction)
+        {
+            List<RuntimeNode> connectedNodes = new List<RuntimeNode>();
+
+            for (int i = 0; i < _connections.Count; i++)
+            {
+                // Find the port of origin in the connections
+                PortConnection connection = _connections[i];
+                var originPortName = connection.OriginPort.PortName;
+                var originPortDirection = connection.OriginPort.PortDirection;
+
+                // If name and direction matches
+                if (originPortName == portName && originPortDirection == direction)
+                {
+                    // Find the Runtime node for the target node GUID
+                    var targetNodeGUID = connection.TargetPort.NodeGUID;
+                    var targetNode = _dialogueFile.FindNodeByGUID(targetNodeGUID);
+                    if (targetNode != null)
+                    {
+                        connectedNodes.Add(targetNode);
+                    }
+                }
+            }
+
+            return connectedNodes.ToArray();
         }
     }
 }
