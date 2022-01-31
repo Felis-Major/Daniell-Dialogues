@@ -1,15 +1,16 @@
 {
-  "name": "com.test.daniell",
+  "name": "com.felismajor.daniell",
   "version": "1.0.0",
   "displayName": "Daniell Dialogues",
   "description": "Branching dialog system and node editor",
   "unity": "2020.3",
   "unityRelease": "0b5",
   "dependencies": {
+    "com.felismajor.daniellcore": "https://github.com/Felis-Major/Daniell-Core.git"
  },
   "author": {
-    "name": "Robert Edilber",
+    "name": "Felis Major",
     "email": "robert.edilber@pm.me",
-    "url": "https://github.com/robertedilber"
+    "url": "https://github.com/Felis-Major"
   }
 }
