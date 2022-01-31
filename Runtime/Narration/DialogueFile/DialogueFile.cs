@@ -7,18 +7,44 @@ using UnityEditor;
 
 namespace Daniell.Runtime.Systems.DialogueNodes
 {
-    [CreateAssetMenu]
+    /// <summary>
+    /// Dialogue file used to store a dialogue graph
+    /// </summary>
+    [CreateAssetMenu(fileName = "Dialogue File", menuName = "Daniell/Dialogues/Dialogue File")]
     [SupportedNodeType(typeof(DialogueLineRuntimeNode))]
+    [SupportedNodeType(typeof(DialogueBranchRuntimeNode))]
     [SupportedNodeType(typeof(CallEventRuntimeNode))]
     public class DialogueFile : ScriptableObject
     {
+        /* ==========================
+         * > Properties
+         * -------------------------- */
+
+        /// <summary>
+        /// Nodes of this dialogue file
+        /// </summary>
         public IEnumerable<RuntimeNode> Nodes => _nodes;
+
+
+        /* ==========================
+         * > Private Fields
+         * -------------------------- */
 
         [SerializeField]
         private List<RuntimeNode> _nodes = new List<RuntimeNode>();
 
+
+        /* ==========================
+         * > Methods
+         * -------------------------- */
+
 #if UNITY_EDITOR
 
+        /// <summary>
+        /// Add a new node to this file (Editor only)
+        /// </summary>
+        /// <typeparam name="T">Type of the node to be added</typeparam>
+        /// <param name="runtimeNodeInstance">Instance of the node to add</param>
         public void AddNode<T>(T runtimeNodeInstance) where T : RuntimeNode
         {
             // Set node dialogue file
@@ -33,6 +59,9 @@ namespace Daniell.Runtime.Systems.DialogueNodes
             AssetDatabase.Refresh();
         }
 
+        /// <summary>
+        /// Clear all the nodes on this file (Editor only)
+        /// </summary>
         public void ClearNodes()
         {
             for (int i = 0; i < _nodes.Count; i++)
@@ -59,10 +88,10 @@ namespace Daniell.Runtime.Systems.DialogueNodes
             {
                 RuntimeNode node = _nodes[i];
 
-                if(node.GUID == nodeGUID)
+                if (node.GUID == nodeGUID)
                 {
                     return node;
-                }    
+                }
             }
 
             return null;
@@ -77,7 +106,7 @@ namespace Daniell.Runtime.Systems.DialogueNodes
             for (int i = 0; i < _nodes.Count; i++)
             {
                 RuntimeNode node = _nodes[i];
-                if(node is StartRuntimeNode startNode)
+                if (node is StartRuntimeNode startNode)
                 {
                     return startNode.GetNextNode();
                 }

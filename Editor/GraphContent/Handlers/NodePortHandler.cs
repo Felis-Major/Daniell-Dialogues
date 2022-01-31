@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Daniell.Editor.Systems.DialogueNodes
@@ -107,8 +108,10 @@ namespace Daniell.Editor.Systems.DialogueNodes
         public virtual void RemovePort(string name, Direction direction)
         {
             var port = FindPort(name, direction);
+
             if (port != null)
             {
+                Debug.Log("remove" + port.portName);
                 port.RemoveFromHierarchy();
                 _ports.Remove(port);
             }
