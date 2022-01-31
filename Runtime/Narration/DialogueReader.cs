@@ -1,27 +1,60 @@
-using Daniell.Runtime.Systems.DialogueNodes;
 using UnityEngine;
 
-public class DialogueReader : MonoBehaviour
+namespace Daniell.Runtime.Systems.DialogueNodes
 {
-    public DialogueFile dialogueFile;
-
-    private void Awake()
+    /// <summary>
+    /// Default dialogue reader for base Dialogue Files
+    /// </summary>
+    public class DialogueReader : BaseDialogueReader
     {
-        var currentNode = dialogueFile.GetFirstNode();
+        /* ==========================
+         * > Properties
+         * -------------------------- */
 
-        while(currentNode != null)
+        [SerializeField]
+        [Tooltip("Default Dialogue File")]
+        private DialogueFile _defaultDialogueFile;
+
+        [SerializeField]
+        [Tooltip("Should this dialogue play on awake?")]
+        private bool _playOnAwake = true;
+
+
+        /* ==========================
+         * > Methods
+         * -------------------------- */
+
+        private void Awake()
         {
-            if(currentNode is DialogueLineRuntimeNode node) 
+            if (_playOnAwake && _defaultDialogueFile != null)
             {
-                print($"{node.Actor.Name} says: {node.Line}");
+                StartDialogue(_defaultDialogueFile);
             }
+        }
 
-            if(currentNode is CallEventRuntimeNode eventNode)
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        protected override void ProcessNode(RuntimeNode node)
+        {
+            switch (node)
             {
-                eventNode.Event.Raise();
-            }
+                case DialogueLineRuntimeNode dialogueLineRuntimeNode:
+                    Debug.Log($"{dialogueLineRuntimeNode.Actor.Name}: {dialogueLineRuntimeNode.Line}");
+                    break;
 
-            currentNode = currentNode.GetNextNode();
+                case DialogueBranchRuntimeNode dialogueBranchRuntimeNode:
+                    Debug.Log($"{dialogueBranchRuntimeNode.Actor.Name}: {dialogueBranchRuntimeNode.Line}");
+                    dialogueBranchRuntimeNode.SelectBranch(0);
+                    break;
+
+                case CallEventRuntimeNode callEventRuntimeNode:
+                    callEventRuntimeNode.Event.Raise();
+
+                    // Immediately process this node
+                    GoToNextNode();
+                    break;
+            }
         }
     }
 }
