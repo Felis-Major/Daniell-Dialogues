@@ -43,7 +43,7 @@ To create a new custom node, you'll need two classes. A **Runtime Node** and its
 - Create Serialized Fields that will hold your data (see ```DialogueLineRuntimeNode``` for an example)
 - Override the ```GetNextNode()``` method. This method will enable you to tell the graph where to go when this node is processed. To find a node using the name of a port, use the ```GetConnectedNodesToPort()``` method. Make sure that you only store runtime informations in this class, otherwise your project won't build.  
 
-### Creating the **Editor Node***
+### Creating the **Editor Node**
 - Create a new class inside an **Editor** folder, and inherit from ```GenericBaseNode<T>``` where T is the type of your RuntimeNode.
 - To configure the node, you can use various attributes:
   - **Mandatory** | ```RuntimeNodeType```: Tells the editor which RuntimeType is associated with this node.
