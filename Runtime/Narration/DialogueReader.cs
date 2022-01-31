@@ -45,7 +45,7 @@ namespace Daniell.Runtime.Systems.DialogueNodes
 
                 case DialogueBranchRuntimeNode dialogueBranchRuntimeNode:
                     Debug.Log($"{dialogueBranchRuntimeNode.Actor.Name}: {dialogueBranchRuntimeNode.Line}");
-                    dialogueBranchRuntimeNode.SelectBranch(0);
+                    dialogueBranchRuntimeNode.SelectBranch(1);
                     break;
 
                 case CallEventRuntimeNode callEventRuntimeNode:
