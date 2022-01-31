@@ -2,7 +2,7 @@
   "name": "com.felismajor.daniell",
   "version": "1.0.0",
   "displayName": "Daniell Dialogues",
-  "description": "Branching dialog system and node editor",
+  "description": "Flexible node based branching dialogue system",
   "unity": "2020.3",
   "unityRelease": "0b5",
   "dependencies": {
