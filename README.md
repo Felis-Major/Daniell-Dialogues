@@ -1,4 +1,4 @@
-# Daniell-Dialogues
+# 🥓 Daniell-Dialogues
 Flexible node based branching dialogue system
 
 ## Dependencies
