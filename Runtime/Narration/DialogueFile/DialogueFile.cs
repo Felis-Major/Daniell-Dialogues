@@ -13,7 +13,11 @@ namespace Daniell.Runtime.Systems.DialogueNodes
     [CreateAssetMenu(fileName = "Dialogue File", menuName = "Daniell/Dialogues/Dialogue File")]
     [SupportedNodeType(typeof(DialogueLineRuntimeNode))]
     [SupportedNodeType(typeof(DialogueBranchRuntimeNode))]
-    [SupportedNodeType(typeof(CallEventRuntimeNode))]
+    [SupportedNodeType(typeof(CallVoidEventRuntimeNode))]
+    [SupportedNodeType(typeof(CallBoolEventRuntimeNode))]
+    [SupportedNodeType(typeof(CallIntEventRuntimeNode))]
+    [SupportedNodeType(typeof(CallStringEventRuntimeNode))]
+    [SupportedNodeType(typeof(CallFloatEventRuntimeNode))]
     public class DialogueFile : ScriptableObject
     {
         /* ==========================

@@ -11,6 +11,9 @@ namespace Daniell.Editor.Systems.DialogueNodes
          * > Constructors
          * -------------------------- */
 
-        public StringNodeField(string labelText) : base(labelText) { }
+        public StringNodeField(string labelText) : base(labelText)
+        {
+
+        }
     }
 }

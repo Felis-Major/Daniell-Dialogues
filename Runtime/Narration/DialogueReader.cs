@@ -48,8 +48,8 @@ namespace Daniell.Runtime.Systems.DialogueNodes
                     dialogueBranchRuntimeNode.SelectBranch(1);
                     break;
 
-                case CallEventRuntimeNode callEventRuntimeNode:
-                    callEventRuntimeNode.Event.Raise();
+                case CallVoidEventRuntimeNode callEventRuntimeNode:
+                    callEventRuntimeNode.RaiseEvent();
 
                     // Immediately process this node
                     GoToNextNode();

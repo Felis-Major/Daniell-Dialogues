@@ -44,14 +44,5 @@ namespace Daniell.Editor.Systems.DialogueNodes
         /// </summary>
         /// <returns>Created visual element</returns>
         protected abstract VisualElement CreateNodeField();
-
-
-        /// <summary>
-        /// Save this object field
-        /// </summary>
-        public virtual void Save()
-        {
-            // Save field
-        }
     }
 }

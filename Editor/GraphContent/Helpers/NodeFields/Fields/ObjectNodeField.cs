@@ -54,17 +54,5 @@ namespace Daniell.Editor.Systems.DialogueNodes
             _objectField.objectType = typeof(T);
             return _objectField;
         }
-
-        /// <summary>
-        /// <inheritdoc/>
-        /// </summary>
-        public override void Save()
-        {
-            if (_objectField != null && _objectField.value != null)
-            {
-                EditorUtility.SetDirty(_objectField.value);
-                AssetDatabase.SaveAssets();
-            }
-        }
     }
 }

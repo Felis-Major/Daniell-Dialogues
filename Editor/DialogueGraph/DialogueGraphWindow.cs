@@ -39,7 +39,7 @@ namespace Daniell.Editor.DialogueNodes
          * > Methods
          * -------------------------- */
 
-        [MenuItem("Daniell/Dialogue Graph")]
+        [MenuItem("Daniell/Dialogues/Dialogue Graph")]
         public static void Open()
         {
             var window = GetWindow<DialogueGraphWindow>();

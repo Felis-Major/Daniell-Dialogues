@@ -111,7 +111,20 @@ namespace Daniell.Editor.Systems.DialogueNodes
 
             if (port != null)
             {
-                Debug.Log("remove" + port.portName);
+                // Disconnect all edges connected to the port
+                if (port.connected)
+                {
+                    foreach (var connection in port.connections)
+                    {
+                        Port targetPort = port.direction == Direction.Input ? connection.output : connection.input;
+
+                        targetPort.Disconnect(connection);
+                        connection.RemoveFromHierarchy();
+                    }
+
+                    port.DisconnectAll();
+                }
+
                 port.RemoveFromHierarchy();
                 _ports.Remove(port);
             }

@@ -13,7 +13,7 @@ namespace Daniell.Editor.Systems.DialogueNodes
          * > Private Fields
          * -------------------------- */
 
-        private TField _field;
+        protected TField _field;
 
 
         /* ==========================
