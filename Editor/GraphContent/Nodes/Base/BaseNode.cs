@@ -15,6 +15,7 @@ namespace Daniell.Editor.Systems.DialogueNodes
     [NodeName("Node")]
     [NodeColor(255, 255, 255)]
     [NodeWidth(12)]
+    [NodeCategory("Other")]
     public abstract class BaseNode : Node
     {
         /* ==========================
@@ -120,6 +121,8 @@ namespace Daniell.Editor.Systems.DialogueNodes
             nodeIcon.style.left = 6f;
             titleContainer.style.paddingLeft = 32;
             titleContainer.Insert(0, nodeIcon);
+
+            titleContainer.style.unityFontStyleAndWeight = FontStyle.Bold;
         }
 
         /// <summary>

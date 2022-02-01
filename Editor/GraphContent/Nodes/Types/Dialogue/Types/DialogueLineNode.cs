@@ -7,7 +7,7 @@ namespace Daniell.Editor.Systems.DialogueNodes
     /// Node used to trigger a new dialogue line
     /// </summary>
     [NodeName("Dialogue Line")]
-    [NodeColor(150, 70, 80)]
+    [NodeColor(156, 59, 86)]
     [RuntimeNodeType(typeof(DialogueLineRuntimeNode))]
     public class DialogueLineNode : BaseDialogueLineNode<DialogueLineRuntimeNode>
     {

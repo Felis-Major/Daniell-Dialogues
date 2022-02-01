@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Daniell.Editor.Systems.DialogueNodes
@@ -133,7 +132,7 @@ namespace Daniell.Editor.Systems.DialogueNodes
 
             // Add Text field
             TextField textField = new TextField();
-            textField.style.width = 140;
+            textField.style.width = 120;
             port.contentContainer.Add(textField);
 
             var branch = new Branch(port, textField);

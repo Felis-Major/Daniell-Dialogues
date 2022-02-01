@@ -64,9 +64,9 @@ namespace Daniell.Editor.DialogueNodes
 
             foreach (Type validNodeType in _validNodeTypes)
             {
-                var nodeNameAttribute = ReflectionHelpers.GetAttributeForType<NodeNameAttribute>(validNodeType);
+                var nodeCategory = ReflectionHelpers.GetAttributeForType<NodeCategoryAttribute>(validNodeType);
 
-                string groupName = nodeNameAttribute.Name;
+                string groupName = nodeCategory.Category;
                 if (!createdGroups.Contains(groupName))
                 {
                     searchTreeEntries.Add(GetGroup(groupName, 1));
@@ -100,7 +100,8 @@ namespace Daniell.Editor.DialogueNodes
 
         private SearchTreeEntry GetEntry<T>(int level) where T : BaseNode, new()
         {
-            var nodeName = Regex.Replace(typeof(T).Name, @"((?<=\p{Ll})\p{Lu})|((?!\A)\p{Lu}(?>\p{Ll}))", " $0");
+            var nodeNameAttribute = ReflectionHelpers.GetAttributeForType<NodeNameAttribute>(typeof(T));
+            var nodeName = nodeNameAttribute.Name;
             var searchTreeEntry = new SearchTreeEntry(new GUIContent(nodeName));
             searchTreeEntry.userData = new NodeCreationContext(() =>
             {

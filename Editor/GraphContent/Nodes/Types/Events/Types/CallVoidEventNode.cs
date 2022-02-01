@@ -8,6 +8,7 @@ namespace Daniell.Editor.Systems.DialogueNodes
     /// </summary>
     [NodeName("Call Void Event")]
     [RuntimeNodeType(typeof(CallVoidEventRuntimeNode))]
+    [NodeColor(101, 42, 199)]
     public class CallVoidEventNode : CallEventNode<VoidEvent, CallVoidEventRuntimeNode>
     {
 
