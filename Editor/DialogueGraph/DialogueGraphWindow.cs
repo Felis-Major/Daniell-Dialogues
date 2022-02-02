@@ -176,8 +176,11 @@ namespace Daniell.Editor.DialogueNodes
             // List all the nodes in the graphview
             _dialogueFile.ClearNodes();
 
+            int nodeIndex = 0;
+
             foreach (BaseNode node in Nodes)
             {
+                EditorUtility.DisplayProgressBar("Saving...", node.NodeName, nodeIndex / (float)Nodes.Count());
                 var nodeTypeAttribute = ReflectionHelpers.GetAttributeForType<RuntimeNodeTypeAttribute>(node.GetType());
                 var runtimeNodeType = nodeTypeAttribute.Type;
 
@@ -204,7 +207,9 @@ namespace Daniell.Editor.DialogueNodes
 
                 // Add new runtime node to the dialogue file
                 _dialogueFile.AddNode(runtimeNode);
+                nodeIndex++;
             }
+            EditorUtility.ClearProgressBar();
         }
 
         /// <summary>
