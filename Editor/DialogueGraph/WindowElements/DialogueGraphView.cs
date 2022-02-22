@@ -94,7 +94,7 @@ namespace Daniell.Editor.DialogueNodes
 
                 var baseNodeTypes = (
                     from domainAssembly in AppDomain.CurrentDomain.GetAssemblies()
-                    from assemblyType in domainAssembly.GetExportedTypes()
+                    from assemblyType in domainAssembly.GetTypes()
                     where assemblyType.IsSubclassOf(typeof(BaseNode)) && !assemblyType.IsAbstract
                     select assemblyType).ToArray();
 
