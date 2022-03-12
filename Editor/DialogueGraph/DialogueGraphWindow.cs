@@ -52,6 +52,12 @@ namespace Daniell.Editor.DialogueNodes
         {
             // Create the toolbar
             CreateToolbar();
+
+            var lastLoadedAssetPath = EditorPrefs.GetString("Last Edited Dialogue");
+            if (!string.IsNullOrEmpty(lastLoadedAssetPath))
+            {
+                _toolbar.Load(AssetDatabase.LoadAssetAtPath<DialogueFile>(lastLoadedAssetPath));
+            }
         }
 
         private void OnDisable()
@@ -142,6 +148,15 @@ namespace Daniell.Editor.DialogueNodes
 
         private void OnDialogueFileValueChanged(DialogueFile dialogueFile)
         {
+            // Save last edited to reopen it later
+            var assetPath = "";
+            if(dialogueFile != null)
+            {
+                assetPath = AssetDatabase.GetAssetPath(dialogueFile);
+            }
+
+            EditorPrefs.SetString("Last Edited Dialogue", assetPath);
+
             // Cache value
             _dialogueFile = dialogueFile;
 

@@ -28,17 +28,24 @@ namespace Daniell.Editor.DialogueNodes
 
 
         /* ==========================
+         * > Private Fields
+         * -------------------------- */
+
+        private readonly ObjectField<DialogueFile> _dialogueFileField;
+
+
+        /* ==========================
          * > Constructors
          * -------------------------- */
 
         public DialogueGraphToolbar()
         {
             // Create dialogue file loading field
-            ObjectField<DialogueFile> dialogueFileField = new ObjectField<DialogueFile>();
-            dialogueFileField.OnValueChanged += x => OnDialogueFileLoaded?.Invoke(x);
+            _dialogueFileField = new ObjectField<DialogueFile>();
+            _dialogueFileField.OnValueChanged += x => OnDialogueFileLoaded?.Invoke(x);
 
             // Add field to the toolbar
-            Add(dialogueFileField);
+            Add(_dialogueFileField);
 
             // Create save button
             Button saveButton = new Button(() => OnSaveButtonPressed?.Invoke());
@@ -46,6 +53,11 @@ namespace Daniell.Editor.DialogueNodes
             saveButton.style.width = 30;
 
             Add(saveButton);
+        }
+
+        public void Load(DialogueFile dialogueFile)
+        {
+            _dialogueFileField.value = dialogueFile;
         }
     }
 }

@@ -26,7 +26,12 @@ namespace Daniell.Runtime.Systems.DialogueNodes
         /// <summary>
         /// Line for this dialogue node
         /// </summary>
-        public string Line { get => _text; set => _text = value; }
+        public string Line { get => _line; set => _line = value; }
+
+        /// <summary>
+        /// Branch data for this dialogue node
+        /// </summary>
+        public BranchData BranchData { get => _branchData; set => _branchData = value; }
 
 
         /* ==========================
@@ -40,7 +45,10 @@ namespace Daniell.Runtime.Systems.DialogueNodes
         private DialogueActor _actor;
 
         [SerializeField]
-        private string _text;
+        private string _line;
+
+        [SerializeField]
+        private BranchData _branchData;
 
         private int _selectedBranch = -1;
 
@@ -56,6 +64,11 @@ namespace Daniell.Runtime.Systems.DialogueNodes
         public void SelectBranch(int i)
         {
             _selectedBranch = i;
+
+            if(_branchData != null)
+            {
+
+            }
         }
 
         /// <summary>
