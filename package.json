@@ -6,7 +6,7 @@
   "unity": "2020.3",
   "unityRelease": "0b5",
   "dependencies": {
-    "com.felismajor.daniellcore": "https://github.com/Felis-Major/Daniell-Core.git"
+    "com.felismajor.core": "https://github.com/Felis-Major/FM-Core.git"
  },
   "author": {
     "name": "Felis Major",
