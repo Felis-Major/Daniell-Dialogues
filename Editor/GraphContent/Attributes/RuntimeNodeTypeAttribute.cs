@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Daniell.Editor.Systems.DialogueNodes
+namespace FM.Editor.Systems.DialogueNodes
 {
     /// <summary>
     /// Attribute used to determine supported node types for this file

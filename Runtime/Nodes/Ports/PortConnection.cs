@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Daniell.Runtime.Systems.DialogueNodes
+namespace FM.Runtime.Systems.DialogueNodes
 {
     /// <summary>
     /// A connection between two ports

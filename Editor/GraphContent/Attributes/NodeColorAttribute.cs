@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Daniell.Editor.Systems.DialogueNodes
+namespace FM.Editor.Systems.DialogueNodes
 {
     /// <summary>
     /// Attribute used to set a node color

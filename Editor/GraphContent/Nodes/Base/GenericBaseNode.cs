@@ -1,7 +1,7 @@
-﻿using Daniell.Runtime.Systems.DialogueNodes;
+﻿using FM.Runtime.Systems.DialogueNodes;
 using System;
 
-namespace Daniell.Editor.Systems.DialogueNodes
+namespace FM.Editor.Systems.DialogueNodes
 {
     /// <summary>
     /// Generic version of base node

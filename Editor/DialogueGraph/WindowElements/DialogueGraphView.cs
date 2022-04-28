@@ -1,15 +1,15 @@
-using Daniell.Runtime.Helpers.Reflection;
-using Daniell.Editor.Systems.DialogueNodes;
+using FM.Runtime.Helpers.Reflection;
+using FM.Editor.Systems.DialogueNodes;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Daniell.Runtime.Systems.DialogueNodes;
+using FM.Runtime.Systems.DialogueNodes;
 using System;
 
-namespace Daniell.Editor.DialogueNodes
+namespace FM.Editor.DialogueNodes
 {
     /// <summary>
     /// Custom dialogue node GraphView element

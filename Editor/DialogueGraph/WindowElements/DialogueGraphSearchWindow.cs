@@ -1,5 +1,5 @@
-﻿using Daniell.Editor.Systems.DialogueNodes;
-using Daniell.Runtime.Helpers.Reflection;
+﻿using FM.Editor.Systems.DialogueNodes;
+using FM.Runtime.Helpers.Reflection;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -8,7 +8,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Daniell.Editor.DialogueNodes
+namespace FM.Editor.DialogueNodes
 {
     /// <summary>
     /// Handles searching and creating nodes

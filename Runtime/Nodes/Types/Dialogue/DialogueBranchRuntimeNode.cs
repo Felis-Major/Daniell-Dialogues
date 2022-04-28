@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Daniell.Runtime.Systems.DialogueNodes
+namespace FM.Runtime.Systems.DialogueNodes
 {
     /// <summary>
     /// Runtime version of a Dialogue Line Node

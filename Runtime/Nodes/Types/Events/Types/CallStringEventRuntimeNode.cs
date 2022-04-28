@@ -1,6 +1,6 @@
-﻿using Daniell.Runtime.Systems.Events;
+﻿using FM.Runtime.Systems.Events;
 
-namespace Daniell.Runtime.Systems.DialogueNodes
+namespace FM.Runtime.Systems.DialogueNodes
 {
     /// <summary>
     /// Runtime version of CallStringEventNode

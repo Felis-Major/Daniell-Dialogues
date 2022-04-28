@@ -1,6 +1,6 @@
 ﻿using UnityEngine.UIElements;
 
-namespace Daniell.Editor.Systems.DialogueNodes
+namespace FM.Editor.Systems.DialogueNodes
 {
     /// <summary>
     /// Generic implementation of a node field for base C# types

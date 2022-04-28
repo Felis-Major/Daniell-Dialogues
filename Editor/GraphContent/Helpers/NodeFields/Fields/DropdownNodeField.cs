@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
-namespace Daniell.Editor.Systems.DialogueNodes
+namespace FM.Editor.Systems.DialogueNodes
 {
     /// <summary>
     /// Node Field used to select a value from a dropdown menu

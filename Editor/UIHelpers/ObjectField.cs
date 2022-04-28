@@ -2,7 +2,7 @@
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
-namespace Daniell.Editor.DialogueNodes
+namespace FM.Editor.DialogueNodes
 {
     /// <summary>
     /// Generic version of Object Field

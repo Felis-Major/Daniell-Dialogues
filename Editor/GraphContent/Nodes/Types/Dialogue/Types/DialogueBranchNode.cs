@@ -1,10 +1,10 @@
-﻿using Daniell.Runtime.Systems.DialogueNodes;
+﻿using FM.Runtime.Systems.DialogueNodes;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 
-namespace Daniell.Editor.Systems.DialogueNodes
+namespace FM.Editor.Systems.DialogueNodes
 {
     /// <summary>
     /// Node used to trigger a new dialogue line

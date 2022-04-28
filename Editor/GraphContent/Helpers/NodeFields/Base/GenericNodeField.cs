@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Daniell.Editor.Systems.DialogueNodes
+namespace FM.Editor.Systems.DialogueNodes
 {
     /// <summary>
     /// Generic version of NodeField allowing for setting and getting field value

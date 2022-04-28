@@ -1,7 +1,7 @@
-﻿using Daniell.Runtime.Systems.DialogueNodes;
-using Daniell.Runtime.Systems.Events;
+﻿using FM.Runtime.Systems.DialogueNodes;
+using FM.Runtime.Systems.Events;
 
-namespace Daniell.Editor.Systems.DialogueNodes
+namespace FM.Editor.Systems.DialogueNodes
 {
     /// <summary>
     /// Generic Node used to call an event

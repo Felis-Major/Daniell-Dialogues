@@ -1,6 +1,6 @@
-﻿using Daniell.Editor.Systems.DialogueNodes;
-using Daniell.Runtime.Helpers.Reflection;
-using Daniell.Runtime.Systems.DialogueNodes;
+﻿using FM.Editor.Systems.DialogueNodes;
+using FM.Runtime.Helpers.Reflection;
+using FM.Runtime.Systems.DialogueNodes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Daniell.Editor.DialogueNodes
+namespace FM.Editor.DialogueNodes
 {
     /// <summary>
     /// Editor window used to edit dialogue files
@@ -39,7 +39,7 @@ namespace Daniell.Editor.DialogueNodes
          * > Methods
          * -------------------------- */
 
-        [MenuItem("Daniell/Dialogues/Dialogue Graph")]
+        [MenuItem("Felis Major/Dialogues/Dialogue Graph")]
         public static void Open()
         {
             var window = GetWindow<DialogueGraphWindow>();

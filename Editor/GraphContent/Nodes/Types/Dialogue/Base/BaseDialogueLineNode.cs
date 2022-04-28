@@ -1,6 +1,6 @@
-﻿using Daniell.Runtime.Systems.DialogueNodes;
+﻿using FM.Runtime.Systems.DialogueNodes;
 
-namespace Daniell.Editor.Systems.DialogueNodes
+namespace FM.Editor.Systems.DialogueNodes
 {
     [NodeCategory("Dialogue")]
     public abstract class BaseDialogueLineNode<T> : GenericBaseNode<T> where T : RuntimeNode

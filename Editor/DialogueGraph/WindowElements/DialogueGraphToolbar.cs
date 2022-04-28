@@ -1,11 +1,11 @@
-﻿using Daniell.Editor.Systems.DialogueNodes;
-using Daniell.Runtime.Systems.DialogueNodes;
+﻿using FM.Editor.Systems.DialogueNodes;
+using FM.Runtime.Systems.DialogueNodes;
 using System;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
-namespace Daniell.Editor.DialogueNodes
+namespace FM.Editor.DialogueNodes
 {
     /// <summary>
     /// Toolbar used for the dialogue graph

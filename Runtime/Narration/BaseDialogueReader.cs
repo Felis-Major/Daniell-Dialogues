@@ -1,9 +1,9 @@
-using Daniell.Runtime.Systems.Events;
-using Daniell.Runtime.Helpers.Coroutines;
+using FM.Runtime.Systems.Events;
+using FM.Runtime.Helpers.Coroutines;
 using System.Collections;
 using UnityEngine;
 
-namespace Daniell.Runtime.Systems.DialogueNodes
+namespace FM.Runtime.Systems.DialogueNodes
 {
     /// <summary>
     /// Base class for reading a dialogue node graph

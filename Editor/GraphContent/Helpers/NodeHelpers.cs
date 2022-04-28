@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Daniell.Editor.Systems.DialogueNodes
+namespace FM.Editor.Systems.DialogueNodes
 {
     public static class NodeHelpers
     {

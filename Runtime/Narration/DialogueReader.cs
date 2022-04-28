@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Daniell.Runtime.Systems.DialogueNodes
+namespace FM.Runtime.Systems.DialogueNodes
 {
     /// <summary>
     /// Default dialogue reader for base Dialogue Files

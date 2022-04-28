@@ -1,11 +1,11 @@
-﻿using Daniell.Runtime.Systems.DialogueNodes;
+﻿using FM.Runtime.Systems.DialogueNodes;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Daniell.Editor.Systems.DialogueNodes
+namespace FM.Editor.Systems.DialogueNodes
 {
     /// <summary>
     /// Handles creating ports for a node

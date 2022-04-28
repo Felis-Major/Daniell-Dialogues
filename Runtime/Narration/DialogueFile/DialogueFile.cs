@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using UnityEditor;
 #endif
 
-namespace Daniell.Runtime.Systems.DialogueNodes
+namespace FM.Runtime.Systems.DialogueNodes
 {
     /// <summary>
     /// Dialogue file used to store a dialogue graph
     /// </summary>
-    [CreateAssetMenu(fileName = "Dialogue File", menuName = "Daniell/Dialogues/Dialogue File")]
+    [CreateAssetMenu(fileName = "Dialogue File", menuName = "Felis Major/Dialogues/Dialogue File")]
     [SupportedNodeType(typeof(DialogueLineRuntimeNode))]
     [SupportedNodeType(typeof(DialogueBranchRuntimeNode))]
     [SupportedNodeType(typeof(CallVoidEventRuntimeNode))]

@@ -1,7 +1,7 @@
-﻿using Daniell.Runtime.Systems.Events;
+﻿using FM.Runtime.Systems.Events;
 using UnityEngine;
 
-namespace Daniell.Runtime.Systems.DialogueNodes
+namespace FM.Runtime.Systems.DialogueNodes
 {
     /// <summary>
     /// Runtime version of call event nodes that have a value to be raised

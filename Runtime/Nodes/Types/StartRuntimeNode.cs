@@ -1,4 +1,4 @@
-﻿namespace Daniell.Runtime.Systems.DialogueNodes
+﻿namespace FM.Runtime.Systems.DialogueNodes
 {
     /// <summary>
     /// The first node in a graph

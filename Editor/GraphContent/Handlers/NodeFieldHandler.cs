@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine.UIElements;
 
-namespace Daniell.Editor.Systems.DialogueNodes
+namespace FM.Editor.Systems.DialogueNodes
 {
     /// <summary>
     /// Handles creating, deleting and setting node field values

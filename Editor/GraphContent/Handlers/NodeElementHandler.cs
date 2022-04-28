@@ -1,6 +1,6 @@
 ﻿using UnityEngine.UIElements;
 
-namespace Daniell.Editor.Systems.DialogueNodes
+namespace FM.Editor.Systems.DialogueNodes
 {
     /// <summary>
     /// Handles creating elements inside a container for a base node
