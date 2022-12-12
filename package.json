@@ -1,6 +1,6 @@
 {
   "name": "com.felismajor.dialogues",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "displayName": "FM Dialogues",
   "description": "Flexible node based branching dialogue system",
   "unity": "2020.3",

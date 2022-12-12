@@ -1,6 +1,6 @@
-using FM.Runtime.Systems.Events;
-using FM.Runtime.Helpers.Coroutines;
 using System.Collections;
+using FM.Runtime.Core.Coroutines;
+using FM.Runtime.Systems.Events;
 using UnityEngine;
 
 namespace FM.Runtime.Systems.DialogueNodes
