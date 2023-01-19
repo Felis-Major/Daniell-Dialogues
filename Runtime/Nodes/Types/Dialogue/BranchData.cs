@@ -6,7 +6,7 @@ namespace FM.Runtime.Systems.DialogueNodes
     /// <summary>
     /// Handles storing a branch choice
     /// </summary>
-    [CreateAssetMenu]
+    //[CreateAssetMenu]
     public class BranchData : ScriptableObject
     {
         /* ==========================
