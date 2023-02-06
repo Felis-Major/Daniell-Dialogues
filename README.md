@@ -1,8 +1,8 @@
-# 💬 Daniell-Dialogues
+# 💬 FM-Dialogues
 Flexible node based branching dialogue system
 
 ## 📦 Dependencies
-- Daniell-Core: https://github.com/Felis-Major/Daniell-Core.git
+- FM-Core: https://github.com/Felis-Major/FM-Core.git
 
 ## 🛰 Concepts
 This dialogue system has 2 core ideas: **Editor Nodes** and **Runtime Nodes**.  
@@ -11,8 +11,8 @@ This dialogue system has 2 core ideas: **Editor Nodes** and **Runtime Nodes**.
 
 ## 🚧 Getting Started
 ### ▶ Start using the dialogue nodes:
-- Create a new Dialogue File (right click in your project folder -> *Daniell/Dialogues/Dialogue File*).  
-- Open up the dialogue editor window. To do so go to Daniell -> Dialogues -> Dialogue Editor.  
+- Create a new Dialogue File (right click in your project folder -> *FM/Dialogues/Dialogue File*).  
+- Open up the dialogue editor window. To do so go to FM -> Dialogues -> Dialogue Editor.  
 - Open your previously created dialogue file by clicking on the dot in the dialogue file field.
 
 You should see a new empty graph, with only a green **Start Node**.  
