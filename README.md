@@ -1,6 +1,8 @@
 # 💬 FM-Dialogues
 Flexible node based branching dialogue system
 
+![dialoguegraph](https://github.com/user-attachments/assets/8ecb59bf-9c96-479c-a38a-afe2700d465e)
+
 ## 📦 Dependencies
 - FM-Core: https://github.com/Felis-Major/FM-Core.git
 
